@@ -20,7 +20,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
 
 
-    app.get("/", function(req, res) {
+app.get("/", function(req, res) {
     res.render("landing");
     });
 
@@ -71,6 +71,7 @@ app.get("/home/signedin/student", function(req, res) {
 });
 
 app.get("/mypayments", function(req, res) {
+    if (req.session.loggedin) {
     mysqlConnection.query("SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId WHERE student_information.username ='" + req.session.username + "'", function(err, result) {
         if (err) {
             console.log(err); 
@@ -79,6 +80,10 @@ app.get("/mypayments", function(req, res) {
             res.render("mypayments", { mypayment: result, username: req.session.username });
         }
     });
+} else {
+    res.redirect('/login')
+
+}
 
 });
 
@@ -122,8 +127,11 @@ app.post("/login", function(req, res) {
 });
 
 app.get("/register", function(req, res) {
+    if (req.session.loggedin) {
     res.render("register");
-
+    } else {
+        res.redirect('/login')
+    }
 });
 
 app.post("/register", function(req, res) {
@@ -143,11 +151,12 @@ app.post("/register", function(req, res) {
     mysqlConnection.query("Insert into logininfo (UserName,Password)  VALUES ('" + email + "','" + cpassword + "')", function(err, result) {
         if (err) console.log(err);
     });
-    alert("User is Added");
+    
     res.redirect("/home/signedIn/admin");
 });
 
 app.get("/adminstudentinfo", function(req, res) {
+    if (req.session.loggedin) {
     mysqlConnection.query("SELECT * FROM student_information ",
         function(err, result) {
             if (err) {
@@ -157,6 +166,9 @@ app.get("/adminstudentinfo", function(req, res) {
                 res.render("adminstudentinfo", { studentinfo: result });
             }
         });
+    } else {
+        res.redirect('/login')
+    }
 });
 
 app.post("/delete/:id", function(req, res) {
@@ -195,7 +207,11 @@ app.post("/update/:user", function(req, res) {
 });
 
 app.get("/payform", function(req, res) {
+    if (req.session.loggedin) {
     res.render("payform");
+    } else{
+        res.redirect('/login')
+    }
 });
 
 app.post("/payform", function(req, res) {
@@ -217,7 +233,7 @@ app.post("/payform", function(req, res) {
                 } else {
 
 
-                    res.redirect("payform");
+                    res.redirect("/paymentinfo");
                 }
             });
         }
@@ -227,6 +243,7 @@ app.post("/payform", function(req, res) {
 });
 
 app.get("/paymentinfo", function(req, res) {
+    if (req.session.loggedin) {
     mysqlConnection.query("SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName,student_information.LastName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId", function(err, result) {
         if (err) {
             console.log(err);
@@ -235,10 +252,17 @@ app.get("/paymentinfo", function(req, res) {
             res.render("paymentinfo", { paymentinfo: result });
         }
     })
+} else{
+    res.redirect('/login')
+}
 });
 
 app.get("/monthlypayments", function(req, res) {
+    if (req.session.loggedin) {
     res.render("monthlypayments");
+    } else {
+        res.redirect('/login')
+    }
 });
 
 app.post("/month", function(req, res) {
@@ -254,12 +278,5 @@ app.post("/month", function(req, res) {
 
 })
 
-// app.get("/search", function(req, res) {
-//     res.render("paymentinfo")
-// });
-
-// app.post("/search", function(req, res) {
-
-// });
 
 app.listen("3000", function() {console.log("Connected");});
