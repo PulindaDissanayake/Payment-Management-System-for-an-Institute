@@ -1,0 +1,39 @@
+body {
+    padding-top: 50px;
+}
+
+.table {
+    margin: auto;
+    width: 30%;
+    margin-top: 2%;
+}
+
+input {
+    text-align: center;
+    border: none;
+}
+
+.bg-navbar {
+    background-color: rgb(54, 53, 52);
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: white;
+    font-family: 'Jomolhari', serif;
+    font-weight: 500px;
+    /* line-height to allow full clickable area */
+}
+
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: black;
+    background-color: rgb(11, 223, 205);
+}
+
+input {
+    size: 0cm;
+}
+
+th {
+    text-align: center;
+}

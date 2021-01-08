@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Oracle-Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/home.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Jomolhari&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<body style="padding-top: 50px">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-navbar fixed-top">
+        <a class="navbar-brand" href=<%=home%>>Oracle</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href=<%=home%></a>Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">News</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Our Staff</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="/adminstudentinfo">Student Information</a> -->
+                    <%- studentinfo %>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="/paymentinfo">Paymentinfo</a> -->
+                    <%- paymentinfo %>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="/payform">Add Payments</a> -->
+                    <%- addpayment %>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                    <a class="nav-link " href=<%=login%>>
+                        <%= signIn %> 
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <!-- <a class="nav-link " href=/register>
+                           Register
+                        </a> -->
+                    <%-reglink%>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="container">
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="col-lg-12 ">
+        <h1 class="heading">Oracle Institute</h1>
+        <p id="motto">Dedicated to Standard of Excellence</p>
+    </div>
+    </div>
+  </div>
+</header>
+
+    <div>
+        <div class=" " style="margin-top: 2%">
+            <h1 style="padding: 1%; color: rgb(35, 38, 39);  font-weight: 700; font-size: 3em; font-family: 'Lato', sans-serif; text-align: center; ">Why you must choose "Oracle"?</h1>
+        </div>
+
+
+        <div class="container-fluid;">
+
+            <div class="row " style="background-color: rgba(118, 177, 245, 0.712); background-size: cover; height:auto;  ">
+                <div class="col-sm-6 col-lg-6 border">
+                    <div class="ml-3 mt-3 mb-2 mr-2" style="padding-left: 1%">
+                        <h1 style="text-align: center; color: rgb(19, 18, 18) ">We have a history!</h1>
+                        <P class=" " style="color: rgb(14, 13, 13); display: block; font-weight: 500; font-size: 18px ">We are the pioneers of English education from 1999 in Anuradhapura. We are devoted to make your child a future leader.We gives the proper English language education which includes speaking, reading & writing. Only from our institute
+                            your child will be able to develop all these four skills.
+                        </P>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 col-lg-6 border" style="text-align: center; font-weight: 500; font-size: 18px ">
+                    <div class="mt-2 pt-2">
+                        <h2 style="font-weight: bold; color: rgb(15, 14, 14)">In our institute we have</h2>
+                        <ul class="list-unstyled " style="color: rgb(19, 18, 18)">
+                            <li>A friendly environment</li>
+                            <li> A Play ground</li>
+                            <li>Personal development</li>
+                            <li> Educational materials</li>
+                        </ul>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

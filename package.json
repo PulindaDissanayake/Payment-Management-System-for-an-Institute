@@ -1,0 +1,24 @@
+{
+  "name": "mini-project",
+  "version": "1.0.0",
+  "description": "Payments Management System For a Institute",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PulindaDissanayake/Payment-Management-System-for-an-Institute.git"
+  },
+  "author": "Pulinda Dissanayake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PulindaDissanayake/Payment-Management-System-for-an-Institute/issues"
+  },
+  "homepage": "https://github.com/PulindaDissanayake/Payment-Management-System-for-an-Institute#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}

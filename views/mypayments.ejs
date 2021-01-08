@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Payments</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/mypayments.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Jomolhari&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<body style="padding-top: 50px">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-navbar fixed-top">
+        <a class="navbar-brand" href="/home ">Oracle</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                  <span class="navbar-toggler-icon"></span>
+                                </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+        </div>
+    </nav>
+    <h1 style="text-align: center">Your Payments:
+        <%=username%>
+    </h1>
+    <table class="table table-sm table-nonfluid table-bordered" id="table">
+        <thead class="thead-dark">
+            <tr>
+                <!-- <th>Index Number</th> -->
+                <th scope="col">PymentId</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Month</th>
+                <th scope="col">Amount</th>
+
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <% mypayment.forEach(function (payment) { %>
+                <tr>
+                    <td>
+                        <%= payment.PaymentId %>
+
+                    </td>
+
+                    <td>
+                        <%= payment.FirstName %>
+
+                    </td>
+                    <td>
+                        <%= payment.Month %>
+
+
+                    </td>
+                    <td>
+
+                        <%= payment.Amount %>
+
+
+                    </td>
+
+
+
+                </tr>
+                <% }) %>
+
+
+        </tbody>
+
+    </table>
+
+</body>
+
+</html>
