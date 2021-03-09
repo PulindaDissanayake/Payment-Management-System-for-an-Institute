@@ -92,7 +92,7 @@ app.get("/home/signedin/student", function (req, res) {
 });
 
 app.get("/mypayments", function (req, res) {
-  if (req.session.loggedin) {
+  if (req.session.loggedin && req.session.username !== "Admin") {
     mysqlConnection.query(
       "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId WHERE student_information.username ='" +
         req.session.username +
@@ -151,7 +151,7 @@ app.post("/login", function (req, res) {
 });
 
 app.get("/register", function (req, res) {
-  if (req.session.loggedin) {
+  if (req.session.loggedin && req.session.username === "Admin") {
     res.render("register");
   } else {
     res.redirect("/login");
@@ -206,7 +206,7 @@ app.post("/register", function (req, res) {
 });
 
 app.get("/adminstudentinfo", function (req, res) {
-  if (req.session.loggedin) {
+  if (req.session.loggedin && req.session.username === "Admin") {
     mysqlConnection.query(
       "SELECT * FROM student_information ",
       function (err, result) {
@@ -281,7 +281,7 @@ app.post("/update/:user", function (req, res) {
 });
 
 app.get("/payform", function (req, res) {
-  if (req.session.loggedin) {
+  if (req.session.loggedin && req.session.username === "Admin") {
     res.render("payform");
   } else {
     res.redirect("/login");
@@ -327,7 +327,7 @@ app.post("/payform", function (req, res) {
 });
 
 app.get("/paymentinfo", function (req, res) {
-  if (req.session.loggedin) {
+  if (req.session.loggedin && req.session.username === "Admin") {
     mysqlConnection.query(
       "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName,student_information.LastName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId",
       function (err, result) {
@@ -345,7 +345,7 @@ app.get("/paymentinfo", function (req, res) {
 });
 
 app.get("/monthlypayments", function (req, res) {
-  if (req.session.loggedin) {
+  if (req.session.loggedin && req.session.username === "Admin") {
     res.render("monthlypayments");
   } else {
     res.redirect("/login");
