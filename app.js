@@ -31,6 +31,7 @@ app.get("/home", function (req, res) {
   var paymentinfo = "";
   var addpayment = "";
   var reglink = ""; //<a class='nav-link ' href='/register'> Register </a>";
+  var signOut = "";
   res.render("home", {
     signIn: signIn,
     login: login,
@@ -39,6 +40,7 @@ app.get("/home", function (req, res) {
     paymentinfo: paymentinfo,
     addpayment: addpayment,
     reglink: reglink,
+    signOut: signOut,
   });
 });
 
@@ -53,6 +55,7 @@ app.get("/home/signedin/admin", function (req, res) {
     var addpayment = "<a class='nav-link' href='/payform'>Add Payments</a>";
     var reglink =
       "<a class='nav-link ' href='/register'> Register Students</a>";
+    var signOut = "<a class='nav-link ' href='/logout'> Log Out</a>";
     res.render("home", {
       signIn: signIn,
       login: login,
@@ -61,6 +64,7 @@ app.get("/home/signedin/admin", function (req, res) {
       addpayment: addpayment,
       home: home,
       reglink: reglink,
+      signOut: signOut,
     });
   } else {
     //res.send('You have to log in');
@@ -77,6 +81,7 @@ app.get("/home/signedin/student", function (req, res) {
     var paymentinfo = "";
     var addpayment = "";
     var reglink = "<a class='nav-link ' href='/mypayments'> My payments </a>";
+    var signOut = "<a class='nav-link ' href='/logout'> Log Out</a>";
     res.render("home", {
       signIn: signIn,
       login: login,
@@ -85,6 +90,7 @@ app.get("/home/signedin/student", function (req, res) {
       addpayment: addpayment,
       home: home,
       reglink: reglink,
+      signOut: signOut,
     });
   } else {
     res.redirect("/login");
@@ -369,6 +375,12 @@ app.post("/month", function (req, res) {
       }
     }
   );
+});
+
+app.get('/logout', function (req, res) {
+  // req.session.currentUser = null;
+  req.session.destroy();
+  res.redirect('/home');
 });
 
 app.listen("3000", function () {
