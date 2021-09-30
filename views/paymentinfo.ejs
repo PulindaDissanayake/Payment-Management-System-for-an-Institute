@@ -34,9 +34,10 @@
         </div>
     </nav>
 
-    <h1 style="text-align: center">Payment Information</h1>
+<div class="text-center justify-content-center my-4">
+    <h1>Payment Information</h1>
 
-    <h4>Search for students who havent paid for different months</h4>
+    <h4>Search for students who havent paid for different months:</h4>
     <form action="/month" method="post">
         <select class="form-control form-control-sm" name="month">
                             <option value="January">January</option>
@@ -54,10 +55,11 @@
                           </select>
         <button type="submit" class="btn btn-primary btn-sm">Submit</button>
     </form>
+</div>
 
 
 
-    <table class="table table-sm table-bordered" id="table">
+    <table class="table table-sm table-bordered mx-1" id="table">
         <thead class="thead-dark">
             <tr>
                 <!-- <th>Index Number</th> -->
