@@ -87,7 +87,7 @@
                                 <input type="text" name="LastName" value="<%= student.LastName %>">
                             </td>
                             <td>
-                                <input type="text" name="Birthday" value="<%= student.Birthday %>">
+                                <input type="text" name="Birthday" value="<%= new Date(student.Birthday).toLocaleDateString('en-GB').slice(0,10); %>">
                             </td>
                             <td>
                                 <input type="text" name="Grade" value="<%= student.Grade %>">
