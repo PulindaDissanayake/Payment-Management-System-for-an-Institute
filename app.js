@@ -209,7 +209,9 @@ app.post("/register", function (req, res) {
         res.render("register", { error: err?.sqlMessage });
       } else {
         mysqlConnection.query(
-          "Insert into logininfo (UserName,Password)  VALUES ('" +
+          "Insert into logininfo (ID,UserName,Password)  VALUES ('" +
+            result?.insertId +
+            "','" +
             email +
             "','" +
             cpassword +
@@ -251,6 +253,14 @@ app.post("/delete/:id", function (req, res) {
       if (err) {
         console.log(err);
       } else {
+        mysqlConnection.query(
+          "DELETE FROM logininfo WHERE ID =" + id,
+          function (err, result) {
+            if (err) {
+              console.log(err);
+            }
+          }
+        );
         res.redirect("/adminstudentinfo");
       }
     }
