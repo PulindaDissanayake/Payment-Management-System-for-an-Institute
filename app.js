@@ -24,24 +24,32 @@ app.get("/", function (req, res) {
 });
 
 app.get("/home", function (req, res) {
-  var signIn = "Sign In";
-  var login = "/login";
-  var home = "#";
-  var studentinfo = "";
-  var paymentinfo = "";
-  var addpayment = "";
-  var reglink = ""; //<a class='nav-link ' href='/register'> Register </a>";
-  var signOut = "";
-  res.render("home", {
-    signIn: signIn,
-    login: login,
-    home: home,
-    studentinfo: studentinfo,
-    paymentinfo: paymentinfo,
-    addpayment: addpayment,
-    reglink: reglink,
-    signOut: signOut,
-  });
+  if (req?.session?.loggedin) {
+    if (req?.session?.username === "Admin") {
+      res.redirect("/home/signedIn/admin");
+    } else {
+      res.redirect("/home/signedIn/student");
+    }
+  } else {
+    var signIn = "Sign In";
+    var login = "/login";
+    var home = "#";
+    var studentinfo = "";
+    var paymentinfo = "";
+    var addpayment = "";
+    var reglink = ""; //<a class='nav-link ' href='/register'> Register </a>";
+    var signOut = "";
+    res.render("home", {
+      signIn: signIn,
+      login: login,
+      home: home,
+      studentinfo: studentinfo,
+      paymentinfo: paymentinfo,
+      addpayment: addpayment,
+      reglink: reglink,
+      signOut: signOut,
+    });
+  }
 });
 
 app.get("/home/signedin/admin", function (req, res) {
@@ -120,8 +128,9 @@ app.get("/mypayments", function (req, res) {
 });
 
 app.get("/login", function (req, res) {
+  var message = "";
   //shows the login page
-  res.render("login");
+  res.render("login", {error : message});
 });
 
 app.post("/login", function (req, res) {
@@ -144,21 +153,22 @@ app.post("/login", function (req, res) {
             res.redirect("/home/signedIn/student");
           }
         } else {
-          res.send("Incorrect Username and/or Password!");
+          res.render("login", {error : "Incorrect Username and/or Password!"});
         }
         res.end();
       }
     );
   } else {
-    res.send("Please enter Username and Password!");
+    res.render("login", {error :"Please enter Username and Password!"});
     res.end();
   }
   //redirect to home page
 });
 
 app.get("/register", function (req, res) {
+  var err = "";
   if (req.session.loggedin && req.session.username === "Admin") {
-    res.render("register");
+    res.render("register", {error : err});
   } else {
     res.redirect("/login");
   }
@@ -194,21 +204,25 @@ app.post("/register", function (req, res) {
       email +
       "')",
     function (err, result) {
-      if (err) throw err;
-    }
-  );
-  mysqlConnection.query(
-    "Insert into logininfo (UserName,Password)  VALUES ('" +
-      email +
-      "','" +
-      cpassword +
-      "')",
-    function (err, result) {
-      if (err) console.log(err);
-    }
-  );
+      if (err) {
+        console.log(err);
+        res.render("register", { error: err?.sqlMessage });
+      } else {
+        mysqlConnection.query(
+          "Insert into logininfo (UserName,Password)  VALUES ('" +
+            email +
+            "','" +
+            cpassword +
+            "')",
+          function (err, result) {
+            if (err) console.log(err);
+          }
+        );
 
-  res.redirect("/home/signedIn/admin");
+        res.redirect("/home/signedIn/admin");
+      }
+    }
+  );
 });
 
 app.get("/adminstudentinfo", function (req, res) {
@@ -377,10 +391,10 @@ app.post("/month", function (req, res) {
   );
 });
 
-app.get('/logout', function (req, res) {
+app.get("/logout", function (req, res) {
   // req.session.currentUser = null;
   req.session.destroy();
-  res.redirect('/home');
+  res.redirect("/home");
 });
 
 app.listen("3000", function () {
