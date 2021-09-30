@@ -89,7 +89,7 @@ app.get("/home/signedin/student", function (req, res) {
     var paymentinfo = "";
     var addpayment = "";
     var reglink = "<a class='nav-link ' href='/mypayments'> My payments </a>";
-    var signOut = "<a class='nav-link ' href='/logout'> Log Out</a>";
+    var signOut = "<a class='nav-link ' href='/logout'> Log Out </a>";
     res.render("home", {
       signIn: signIn,
       login: login,
@@ -130,7 +130,7 @@ app.get("/mypayments", function (req, res) {
 app.get("/login", function (req, res) {
   var message = "";
   //shows the login page
-  res.render("login", {error : message});
+  res.render("login", { error: message });
 });
 
 app.post("/login", function (req, res) {
@@ -153,13 +153,13 @@ app.post("/login", function (req, res) {
             res.redirect("/home/signedIn/student");
           }
         } else {
-          res.render("login", {error : "Incorrect Username and/or Password!"});
+          res.render("login", { error: "Incorrect Username and/or Password!" });
         }
         res.end();
       }
     );
   } else {
-    res.render("login", {error :"Please enter Username and Password!"});
+    res.render("login", { error: "Please enter Username and Password!" });
     res.end();
   }
   //redirect to home page
@@ -168,7 +168,7 @@ app.post("/login", function (req, res) {
 app.get("/register", function (req, res) {
   var err = "";
   if (req.session.loggedin && req.session.username === "Admin") {
-    res.render("register", {error : err});
+    res.render("register", { error: err });
   } else {
     res.redirect("/login");
   }
