@@ -1,7 +1,6 @@
 var express = require("express");
 var app = express();
 var session = require("express-session");
-var bodyparser = require("body-parser");
 var mysqlConnection = require("./model/db");
 
 app.use(
@@ -15,7 +14,7 @@ app.use(
   })
 );
 
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
