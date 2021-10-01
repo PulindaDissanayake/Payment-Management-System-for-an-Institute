@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var session = require("express-session");
+var axios = require("axios");
 var mysqlConnection = require("./model/db");
 
 app.use(
@@ -321,7 +322,11 @@ app.get("/payform", function (req, res) {
         if (err) {
           console.log(err);
         } else {
-          res.render("payform", { studentinfo: result, message: "", error: "" });
+          res.render("payform", {
+            studentinfo: result,
+            message: "",
+            error: "",
+          });
         }
       }
     );
@@ -336,7 +341,7 @@ app.post("/payform", function (req, res) {
   var year = req.body.year;
   var month1 = req.body.month;
 
-  var date = year + " - " + month1;
+  var date = year + "-" + month1;
 
   if (username && month1 && year && amount) {
     mysqlConnection.query(
@@ -434,7 +439,7 @@ app.post("/month", function (req, res) {
   var year = req.body.year;
   var month = req.body.month;
 
-  var date = year + " - " + month;
+  var date = year + "-" + month;
 
   mysqlConnection.query(
     "SELECT FirstName,MobileNumber,Grade FROM student_information WHERE StudentId not in (SELECT DISTINCT StudentId FROM payments WHERE Month='" +
@@ -451,6 +456,43 @@ app.post("/month", function (req, res) {
       }
     }
   );
+});
+
+app.post("/notify/:firstName/:number/:month", function (req, res) {
+  var mobileNumber = req.params.number;
+  var month = req.params.month;
+  var firstName = req.params.firstName;
+
+  var id = 94717259339;
+  var pw = 4714;
+  var message =
+    "This%20message%20is%20from%20ORACLE.%20This%20is%20to%20inform%20you%20that%20your%20child%2C%20%20" +
+    firstName +
+    "%20has%20an%20outstanding%20monthly%20fee%20for%20" +
+    month +
+    ".";
+
+  var url =
+    "http://www.textit.biz/sendmsg?id=" +
+    id +
+    "&pw=" +
+    pw +
+    "&to=" +
+    mobileNumber +
+    "&text=" +
+    message;
+
+  var config = {};
+  if (mobileNumber && month && firstName) {
+    // axios.post(url, config).then(function (response) {
+    //   console.log(response.data);
+    //   console.log(response.status);
+    //   console.log(response.statusText);
+    //   console.log(response.headers);
+    //   console.log(response.config);
+    // });
+    res.send('Message is successfully sent to:'+ mobileNumber);
+  }
 });
 
 app.get("/logout", function (req, res) {

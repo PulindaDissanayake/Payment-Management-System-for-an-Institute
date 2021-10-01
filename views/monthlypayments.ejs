@@ -41,7 +41,7 @@
                 <th scope="col">First Name</th>
                 <th scope="col">Mobile Number</th>
                 <th scope="col">Grade</th>
-
+                <th scope="col">Notice of non-payment by a text message</th>
 
 
             </tr>
@@ -68,8 +68,11 @@
 
 
                     </td>
-
-
+                    <td>
+                        <form action="/notify/<%= student.FirstName %>/<%= student.MobileNumber %>/<%=selectedmonth%>" method="POST" autocomplete="off">
+                        <button type="submit" class="btn btn-primary">Notify User</button>
+                        </form>
+                    </td>
 
                 </tr>
                 <% }) %>

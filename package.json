@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/PulindaDissanayake/Payment-Management-System-for-an-Institute#readme",
   "dependencies": {
+    "axios": "^0.22.0",
     "body-parser": "^1.19.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
