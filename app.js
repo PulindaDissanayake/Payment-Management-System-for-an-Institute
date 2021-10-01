@@ -166,9 +166,8 @@ app.post("/login", function (req, res) {
 });
 
 app.get("/register", function (req, res) {
-  var err = "";
   if (req.session.loggedin && req.session.username === "Admin") {
-    res.render("register", { error: err });
+    res.render("register", { error: "", success: "" });
   } else {
     res.redirect("/login");
   }
@@ -206,7 +205,7 @@ app.post("/register", function (req, res) {
     function (err, result) {
       if (err) {
         console.log(err);
-        res.render("register", { error: err?.sqlMessage });
+        res.render("register", { error: err?.sqlMessage, success: "" });
       } else {
         mysqlConnection.query(
           "Insert into logininfo (ID,UserName,Password)  VALUES ('" +
@@ -217,11 +216,16 @@ app.post("/register", function (req, res) {
             cpassword +
             "')",
           function (err, result) {
-            if (err) console.log(err);
+            if (err) {
+              console.log(err);
+            } else {
+              res.render("register", {
+                success: "Student is registered : " + email,
+                error: "",
+              });
+            }
           }
         );
-
-        res.redirect("/home/signedIn/admin");
       }
     }
   );
@@ -318,7 +322,7 @@ app.get("/payform", function (req, res) {
         if (err) {
           console.log(err);
         } else {
-          res.render("payform", { studentinfo: result, message: "" });
+          res.render("payform", { studentinfo: result, message: "", error: "" });
         }
       }
     );
@@ -333,54 +337,72 @@ app.post("/payform", function (req, res) {
   var year = req.body.year;
   var month1 = req.body.month;
 
-  var date = year +" - "+ month1;
+  var date = year + " - " + month1;
 
-  mysqlConnection.query(
-    "SELECT StudentId FROM student_information where UserName='" +
-      username +
-      "'",
-    function (err, result1) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(result1);
-        mysqlConnection.query(
-          "Insert into payments (Amount,Month,StudentId) VALUES ('" +
-            amount +
-            "','" +
-            date +
-            "'," +
-            result1[0].StudentId +
-            ")",
-          function (err, result2) {
-            if (err) {
-              console.log(err);
-            } else {
-              mysqlConnection.query(
-                "SELECT * FROM student_information ",
-                function (err, result) {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    res.render("payform", {
-                      studentinfo: result,
-                      message:
-                        username +
-                        "'s fees( " +
-                        amount +
-                        " rupees ) for " +
-                        date +
-                        " added",
-                    });
+  if (username && month1 && year && amount) {
+    mysqlConnection.query(
+      "SELECT StudentId FROM student_information where UserName='" +
+        username +
+        "'",
+      function (err, result1) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(result1);
+          mysqlConnection.query(
+            "Insert into payments (Amount,Month,StudentId) VALUES ('" +
+              amount +
+              "','" +
+              date +
+              "'," +
+              result1[0].StudentId +
+              ")",
+            function (err, result2) {
+              if (err) {
+                console.log(err);
+              } else {
+                mysqlConnection.query(
+                  "SELECT * FROM student_information ",
+                  function (err, result) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      res.render("payform", {
+                        studentinfo: result,
+                        error: "",
+                        message:
+                          username +
+                          "'s fees( " +
+                          amount +
+                          " rupees ) for " +
+                          date +
+                          " added",
+                      });
+                    }
                   }
-                }
-              );
+                );
+              }
             }
-          }
-        );
+          );
+        }
       }
-    }
-  );
+    );
+  } else {
+    mysqlConnection.query(
+      "SELECT * FROM student_information ",
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("payform", {
+            studentinfo: result,
+            message: "",
+            error: "Please fill all the inputs",
+          });
+        }
+      }
+    );
+  }
 });
 
 app.get("/paymentinfo", function (req, res) {
@@ -413,7 +435,7 @@ app.post("/month", function (req, res) {
   var year = req.body.year;
   var month = req.body.month;
 
-  var date = year +" - "+ month;
+  var date = year + " - " + month;
 
   mysqlConnection.query(
     "SELECT FirstName,MobileNumber,Grade FROM student_information WHERE StudentId not in (SELECT DISTINCT StudentId FROM payments WHERE Month='" +
