@@ -42,6 +42,15 @@
 
     <h4>Search for students who havent paid for different months:</h4>
     <form action="/month" method="post">
+
+            <select class="form-control form-control-sm" name="year">
+                <% var date=new Date().getFullYear(); %>
+                    <%for(var i=date;i>2014;i--) { %>
+                            <option value='<%= i%>'><%= i%> </option>
+                             <% }%>                 
+                      </select>
+
+
         <select class="form-control form-control-sm" name="month">
                             <option value="January">January</option>
                             <option value="February">February</option>

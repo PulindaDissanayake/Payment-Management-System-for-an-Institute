@@ -20,3 +20,26 @@
     width: 30%;
     /* text-align: center; */
 }
+
+.hideMe {
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+    to {
+    width:0;
+    height:0;
+    overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+    width:0;
+    height:0;
+    visibility:hidden;
+    }
+}

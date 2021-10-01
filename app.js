@@ -312,7 +312,16 @@ app.post("/update/:user", function (req, res) {
 
 app.get("/payform", function (req, res) {
   if (req.session.loggedin && req.session.username === "Admin") {
-    res.render("payform");
+    mysqlConnection.query(
+      "SELECT * FROM student_information ",
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("payform", { studentinfo: result, message: "" });
+        }
+      }
+    );
   } else {
     res.redirect("/login");
   }
@@ -321,10 +330,10 @@ app.get("/payform", function (req, res) {
 app.post("/payform", function (req, res) {
   var username = req.body.username;
   var amount = req.body.amount;
-  var date = new Date();
-  var month = req.body.month;
-  var body1;
-  var msg = "done";
+  var year = req.body.year;
+  var month1 = req.body.month;
+
+  var date = year +" - "+ month1;
 
   mysqlConnection.query(
     "SELECT StudentId FROM student_information where UserName='" +
@@ -339,7 +348,7 @@ app.post("/payform", function (req, res) {
           "Insert into payments (Amount,Month,StudentId) VALUES ('" +
             amount +
             "','" +
-            month +
+            date +
             "'," +
             result1[0].StudentId +
             ")",
@@ -347,7 +356,25 @@ app.post("/payform", function (req, res) {
             if (err) {
               console.log(err);
             } else {
-              res.redirect("/paymentinfo");
+              mysqlConnection.query(
+                "SELECT * FROM student_information ",
+                function (err, result) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    res.render("payform", {
+                      studentinfo: result,
+                      message:
+                        username +
+                        "'s fees( " +
+                        amount +
+                        " rupees ) for " +
+                        date +
+                        " added",
+                    });
+                  }
+                }
+              );
             }
           }
         );
@@ -383,10 +410,14 @@ app.get("/monthlypayments", function (req, res) {
 });
 
 app.post("/month", function (req, res) {
+  var year = req.body.year;
   var month = req.body.month;
+
+  var date = year +" - "+ month;
+
   mysqlConnection.query(
     "SELECT FirstName,MobileNumber,Grade FROM student_information WHERE StudentId not in (SELECT DISTINCT StudentId FROM payments WHERE Month='" +
-      month +
+      date +
       "' )",
     function (err, result) {
       if (err) {
@@ -394,7 +425,7 @@ app.post("/month", function (req, res) {
       } else {
         res.render("monthlypayments", {
           studentpayinfo: result,
-          selectedmonth: month,
+          selectedmonth: date,
         });
       }
     }

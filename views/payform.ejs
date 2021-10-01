@@ -44,6 +44,9 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
+                    <a class="nav-link " href="/paymentinfo">List of Payments</a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link " href="/home">Go Back</a>
                 </li>
 
@@ -57,13 +60,32 @@
         <div class="formbeautify">
             <form action="/payform" method="POST">
                 <div class="form-group">
-                    <label for="username">Email</label>
-                    <input type="text" class="form-control" name="username" placeholder="">
+                    <label for="username">UserName</label>
+                    <select class="form-control form-control-sm" name="username">
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <% studentinfo.forEach(function (student) { %>
+                                <option value="<%= student.Username %>"><%= student.Username %></option>
+                                <% }) %>
+                              </select>
 
                 </div>
+
                 <div class="form-group">
-                    <label for="month">Select Month</label>
+                    <label for="username">Year</label>
+                    <select class="form-control form-control-sm" name="year">
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <% var date=new Date().getFullYear(); %>
+                            <%for(var i=date;i>2014;i--) { %>
+                                    <option value='<%= i%>'><%= i%> </option>
+                                     <% }%>                 
+                              </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="month">Month</label>
                     <select class="form-control form-control-sm" name="month">
+                                <option value="" selected disabled hidden>Choose here</option>
                                 <option value="January">January</option>
                                 <option value="February">February</option>
                                 <option value="March">March</option>
@@ -85,6 +107,9 @@
 
                 </div>
                 <button type="submit" class="btn btn-primary">Add Payment</button>
+                <div class="text-center mt-3 justify-content-center hideMe">
+                    <div class="col-auto bg-success text-white font-weight-bold rounded-pill"><%=message%></div>
+                </div>
             </form>
         </div>
 
