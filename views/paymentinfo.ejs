@@ -1,129 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Payments Info</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="paymentinfo.css">
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="paymentinfo.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Jomolhari&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700">
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Jomolhari&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Anton&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body style="padding-top: 50px">
-
+  <body style="padding-top: 50px">
     <nav class="navbar navbar-expand-lg navbar-dark bg-navbar fixed-top">
-        <a class="navbar-brand" href="/home ">Oracle</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
+      <a class="navbar-brand" href="/home ">Oracle</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link " href="/home">Go Back</a>
-                    </li>
-    
-            </ul>
-
-        </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" onclick="{window.history.back()}" href="#"
+              >Go Back</a
+            >
+          </li>
+        </ul>
+      </div>
     </nav>
 
-<div class="text-center justify-content-center my-4">
-    <h1>Payment Information</h1>
+    <div class="text-center justify-content-center my-4">
+      <h1>Payment Information</h1>
 
-    <h4>Search for students who havent paid for different months:</h4>
-    <form action="/month" method="post">
-
-            <select class="form-control form-control-sm" name="year">
-                <% var date=new Date().getFullYear(); %>
-                    <%for(var i=date;i>2014;i--) { %>
-                            <option value='<%= i%>'><%= i%> </option>
-                             <% }%>                 
-                      </select>
-
+      <h4>Search for students who havent paid for different months:</h4>
+      <form action="/month" method="post">
+        <select class="form-control form-control-sm" name="year">
+          <% var date=new Date().getFullYear(); %> <%for(var i=date;i>2014;i--)
+          { %>
+          <option value="<%= i%>"><%= i%></option>
+          <% }%>
+        </select>
 
         <select class="form-control form-control-sm" name="month">
-                            <option value="January">January</option>
-                            <option value="February">February</option>
-                            <option value="March">March</option>
-                            <option value="April">April</option>
-                            <option value="May">May</option>
-                            <option value="June">June</option>
-                            <option value="July">July</option>
-                            <option value="August">August</option>
-                            <option value="Septembe">September</option>
-                            <option value="October">October</option>
-                            <option value="November">November</option>
-                            <option value="December">December</option>
-                          </select>
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="Septembe">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
         <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-    </form>
-</div>
-
-
+      </form>
+    </div>
 
     <table class="table table-sm table-bordered mx-1" id="table">
-        <thead class="thead-dark">
-            <tr>
-                <!-- <th>Index Number</th> -->
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Month</th>
-                <th scope="col">Amount</th>
-                <th scope="col">PaymentId</th>
+      <thead class="thead-dark">
+        <tr>
+          <!-- <th>Index Number</th> -->
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Month</th>
+          <th scope="col">Amount</th>
+          <th scope="col">PaymentId</th>
+        </tr>
+      </thead>
 
-
-            </tr>
-        </thead>
-
-        <tbody>
-
-            <% paymentinfo.forEach(function (payment) { %>
-                <tr>
-
-
-                    <td>
-                        <%= payment.FirstName %>
-
-                    </td>
-                    <td>
-                        <%= payment.LastName %>
-
-
-                    </td>
-                    <td>
-
-                        <%= payment.Month %>
-
-
-                    </td>
-                    <td>
-                        <%= payment.Amount %>
-
-                    </td>
-                    <td>
-                        <%= payment.PaymentId %>
-
-                    </td>
-
-
-                </tr>
-                <% }) %>
-
-
-        </tbody>
-
+      <tbody>
+        <% paymentinfo.forEach(function (payment) { %>
+        <tr>
+          <td><%= payment.FirstName %></td>
+          <td><%= payment.LastName %></td>
+          <td><%= payment.Month %></td>
+          <td><%= payment.Amount %></td>
+          <td><%= payment.PaymentId %></td>
+        </tr>
+        <% }) %>
+      </tbody>
     </table>
-
-</body>
-
+  </body>
 </html>

@@ -491,7 +491,9 @@ app.post("/notify/:firstName/:number/:month", function (req, res) {
     //   console.log(response.headers);
     //   console.log(response.config);
     // });
-    res.render("messagesent", {message: 'Message is successfully sent to: '+ mobileNumber});
+    res.render("messagesent", {
+      message: "Message is successfully sent to: " + mobileNumber,
+    });
   }
 });
 
