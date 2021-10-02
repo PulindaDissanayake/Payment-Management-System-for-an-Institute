@@ -87,7 +87,7 @@ hr {
   color: #333;
 }
 .popup .close:hover {
-  color: #06d85f;
+  color: red;
 }
 .popup .content {
   max-height: 30%;

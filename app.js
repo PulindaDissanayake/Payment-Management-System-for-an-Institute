@@ -10,7 +10,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     cookie: {
-      maxAge: 1 * 10 * 60 * 1000,
+      maxAge: 1000 * 60 * 60 * 2,
     },
   })
 );
@@ -83,22 +83,24 @@ app.post("/news", function (req, res) {
     var news = req.body.news;
     var date = req.body.date;
 
-    mysqlConnection.query(
-      "Insert into news (Description,Date) VALUES ('" +
-      news +
-      "','" +
-      date +
-      "')",
-      function (err, result) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.redirect("/news");
+    if (news && date) {
+      mysqlConnection.query(
+        "Insert into news (Description,Date) VALUES ('" +
+          news +
+          "','" +
+          date +
+          "')",
+        function (err, result) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.redirect("/news");
+          }
         }
-      }
-    );
+      );
+    }
   }
-})
+});
 
 app.get("/home/signedin/admin", function (req, res) {
   if (req.session.loggedin && req.session.username === "Admin") {
@@ -161,8 +163,8 @@ app.get("/mypayments", function (req, res) {
   if (req.session.loggedin && req.session.username !== "Admin") {
     mysqlConnection.query(
       "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId WHERE student_information.username ='" +
-      req.session.username +
-      "'",
+        req.session.username +
+        "'",
       function (err, result) {
         if (err) {
           console.log(err);
@@ -250,22 +252,22 @@ app.post("/register", function (req, res) {
   if (isFilled) {
     mysqlConnection.query(
       "Insert into student_information (FirstName,LastName,Birthday,GuardianName,MobileNumber,School,Grade,Username) VALUES ('" +
-      firstName +
-      "','" +
-      lastName +
-      "','" +
-      birthday +
-      "','" +
-      guardian +
-      "','" +
-      mobileNo +
-      "','" +
-      school +
-      "'," +
-      grade +
-      ",'" +
-      email +
-      "')",
+        firstName +
+        "','" +
+        lastName +
+        "','" +
+        birthday +
+        "','" +
+        guardian +
+        "','" +
+        mobileNo +
+        "','" +
+        school +
+        "'," +
+        grade +
+        ",'" +
+        email +
+        "')",
       function (err, result) {
         if (err) {
           console.log(err);
@@ -273,12 +275,12 @@ app.post("/register", function (req, res) {
         } else {
           mysqlConnection.query(
             "Insert into logininfo (ID,UserName,Password)  VALUES ('" +
-            result?.insertId +
-            "','" +
-            email +
-            "','" +
-            cpassword +
-            "')",
+              result?.insertId +
+              "','" +
+              email +
+              "','" +
+              cpassword +
+              "')",
             function (err, result) {
               if (err) {
                 console.log(err);
@@ -351,24 +353,24 @@ app.post("/update/:user", function (req, res) {
 
   mysqlConnection.query(
     "UPDATE student_information SET FirstName='" +
-    FirstName +
-    "',LastName='" +
-    LastName +
-    "',Username='" +
-    Username +
-    "',Birthday='" +
-    Birthday +
-    "',GuardianName='" +
-    GuardianName +
-    "',MobileNumber='" +
-    MobileNumber +
-    "',School='" +
-    School +
-    "',Grade='" +
-    Grade +
-    "'  WHERE Username='" +
-    user +
-    "'",
+      FirstName +
+      "',LastName='" +
+      LastName +
+      "',Username='" +
+      Username +
+      "',Birthday='" +
+      Birthday +
+      "',GuardianName='" +
+      GuardianName +
+      "',MobileNumber='" +
+      MobileNumber +
+      "',School='" +
+      School +
+      "',Grade='" +
+      Grade +
+      "'  WHERE Username='" +
+      user +
+      "'",
     function (err, results) {
       if (err) {
         console.log(err);
@@ -411,8 +413,8 @@ app.post("/payform", function (req, res) {
   if (username && month1 && year && amount) {
     mysqlConnection.query(
       "SELECT StudentId FROM student_information where UserName='" +
-      username +
-      "'",
+        username +
+        "'",
       function (err, result1) {
         if (err) {
           console.log(err);
@@ -420,12 +422,12 @@ app.post("/payform", function (req, res) {
           console.log(result1);
           mysqlConnection.query(
             "Insert into payments (Amount,Month,StudentId) VALUES ('" +
-            amount +
-            "','" +
-            date +
-            "'," +
-            result1[0].StudentId +
-            ")",
+              amount +
+              "','" +
+              date +
+              "'," +
+              result1[0].StudentId +
+              ")",
             function (err, result2) {
               if (err) {
                 console.log(err);
@@ -508,8 +510,8 @@ app.post("/month", function (req, res) {
 
   mysqlConnection.query(
     "SELECT FirstName,MobileNumber,Grade FROM student_information WHERE StudentId not in (SELECT DISTINCT StudentId FROM payments WHERE Month='" +
-    date +
-    "' )",
+      date +
+      "' )",
     function (err, result) {
       if (err) {
         console.log(err);
