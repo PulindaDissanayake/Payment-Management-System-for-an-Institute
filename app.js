@@ -184,51 +184,64 @@ app.post("/register", function (req, res) {
   var email = req.body.email;
   var cpassword = req.body.cpassword;
   // var index = req.body.index;
-  mysqlConnection.query(
-    "Insert into student_information (FirstName,LastName,Birthday,GuardianName,MobileNumber,School,Grade,Username) VALUES ('" +
-      firstName +
-      "','" +
-      lastName +
-      "','" +
-      birthday +
-      "','" +
-      guardian +
-      "','" +
-      mobileNo +
-      "','" +
-      school +
-      "'," +
-      grade +
-      ",'" +
-      email +
-      "')",
-    function (err, result) {
-      if (err) {
-        console.log(err);
-        res.render("register", { error: err?.sqlMessage, success: "" });
-      } else {
-        mysqlConnection.query(
-          "Insert into logininfo (ID,UserName,Password)  VALUES ('" +
-            result?.insertId +
-            "','" +
-            email +
-            "','" +
-            cpassword +
-            "')",
-          function (err, result) {
-            if (err) {
-              console.log(err);
-            } else {
-              res.render("register", {
-                success: "Student is registered : " + email,
-                error: "",
-              });
+  var isFilled =
+    firstName &&
+    lastName &&
+    birthday &&
+    guardian &&
+    mobileNo &&
+    school &&
+    grade &&
+    email &&
+    cpassword;
+
+  if (isFilled) {
+    mysqlConnection.query(
+      "Insert into student_information (FirstName,LastName,Birthday,GuardianName,MobileNumber,School,Grade,Username) VALUES ('" +
+        firstName +
+        "','" +
+        lastName +
+        "','" +
+        birthday +
+        "','" +
+        guardian +
+        "','" +
+        mobileNo +
+        "','" +
+        school +
+        "'," +
+        grade +
+        ",'" +
+        email +
+        "')",
+      function (err, result) {
+        if (err) {
+          console.log(err);
+          res.render("register", { error: err?.sqlMessage, success: "" });
+        } else {
+          mysqlConnection.query(
+            "Insert into logininfo (ID,UserName,Password)  VALUES ('" +
+              result?.insertId +
+              "','" +
+              email +
+              "','" +
+              cpassword +
+              "')",
+            function (err, result) {
+              if (err) {
+                console.log(err);
+              } else {
+                res.render("register", {
+                  success: "Student is registered : " + email,
+                  error: "",
+                });
+              }
             }
-          }
-        );
+          );
+        }
       }
-    }
-  );
+    );
+  }
 });
 
 app.get("/adminstudentinfo", function (req, res) {

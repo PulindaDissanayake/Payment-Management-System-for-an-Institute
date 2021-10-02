@@ -108,6 +108,7 @@
                   type="text"
                   name="Username"
                   value="<%= student.Username %>"
+                  required
                 />
               </td>
               <td>
@@ -115,6 +116,7 @@
                   type="text"
                   name="FirstName"
                   value="<%= student.FirstName %>"
+                  required
                 />
               </td>
               <td>
@@ -122,6 +124,7 @@
                   type="text"
                   name="LastName"
                   value="<%= student.LastName %>"
+                  required
                 />
               </td>
               <td>
@@ -129,16 +132,23 @@
                   type="date"
                   name="Birthday"
                   value="<%= student.Birthday.toISOString().slice(0,10); %>"
+                  required
                 />
               </td>
               <td>
-                <input type="text" name="Grade" value="<%= student.Grade %>" />
+                <input
+                  type="text"
+                  name="Grade"
+                  value="<%= student.Grade %>"
+                  required
+                />
               </td>
               <td>
                 <input
                   type="text"
                   name="GuardianName"
                   value="<%= student.GuardianName %>"
+                  required
                 />
               </td>
               <td>
@@ -146,6 +156,7 @@
                   type="text"
                   name="MobileNumber"
                   value="<%= student.MobileNumber %>"
+                  required
                 />
               </td>
               <td>
@@ -153,6 +164,7 @@
                   type="text"
                   name="School"
                   value="<%= student.School %>"
+                  required
                 />
               </td>
               <td>
