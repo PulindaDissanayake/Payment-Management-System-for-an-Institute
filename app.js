@@ -78,8 +78,7 @@ app.get("/news", function (req, res) {
   });
 });
 
-app.post("/news", function (req, res) {
-  if (req.session.loggedin && req.session.username === "Admin") {
+app.post("/news", isAdminLoggedIn, function (req, res) {
     var news = req.body.news;
     var date = req.body.date;
 
@@ -98,12 +97,10 @@ app.post("/news", function (req, res) {
           }
         }
       );
-    }
   }
 });
 
-app.get("/home/signedin/admin", function (req, res) {
-  if (req.session.loggedin && req.session.username === "Admin") {
+app.get("/home/signedin/admin", isAdminLoggedIn, function (req, res) {
     var signIn = `Welcome ${req.session.username}`;
     var home = "#";
     var login = "";
@@ -126,14 +123,9 @@ app.get("/home/signedin/admin", function (req, res) {
       signOut: signOut,
       news,
     });
-  } else {
-    //res.send('You have to log in');
-    res.redirect("/login");
-  }
 });
 
-app.get("/home/signedin/student", function (req, res) {
-  if (req.session.loggedin && req.session.username !== "Admin") {
+app.get("/home/signedin/student", isUserLoggedIn, function (req, res) {
     var signIn = `Welcome ${req.session.username}`;
     var login = "#";
     var home = "#";
@@ -154,13 +146,9 @@ app.get("/home/signedin/student", function (req, res) {
       signOut,
       news,
     });
-  } else {
-    res.redirect("/login");
-  }
 });
 
-app.get("/mypayments", function (req, res) {
-  if (req.session.loggedin && req.session.username !== "Admin") {
+app.get("/mypayments", isUserLoggedIn, function (req, res) {
     mysqlConnection.query(
       "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId WHERE student_information.username ='" +
         req.session.username +
@@ -176,9 +164,6 @@ app.get("/mypayments", function (req, res) {
         }
       }
     );
-  } else {
-    res.redirect("/login");
-  }
 });
 
 app.get("/login", function (req, res) {
@@ -219,12 +204,8 @@ app.post("/login", function (req, res) {
   //redirect to home page
 });
 
-app.get("/register", function (req, res) {
-  if (req.session.loggedin && req.session.username === "Admin") {
+app.get("/register", isAdminLoggedIn, function (req, res) {
     res.render("register", { error: "", success: "" });
-  } else {
-    res.redirect("/login");
-  }
 });
 
 app.post("/register", function (req, res) {
@@ -298,8 +279,7 @@ app.post("/register", function (req, res) {
   }
 });
 
-app.get("/adminstudentinfo", function (req, res) {
-  if (req.session.loggedin && req.session.username === "Admin") {
+app.get("/adminstudentinfo", isAdminLoggedIn, function (req, res) {
     mysqlConnection.query(
       "SELECT * FROM student_information ",
       function (err, result) {
@@ -310,9 +290,6 @@ app.get("/adminstudentinfo", function (req, res) {
         }
       }
     );
-  } else {
-    res.redirect("/login");
-  }
 });
 
 app.post("/delete/:id", function (req, res) {
@@ -381,8 +358,7 @@ app.post("/update/:user", function (req, res) {
   );
 });
 
-app.get("/payform", function (req, res) {
-  if (req.session.loggedin && req.session.username === "Admin") {
+app.get("/payform", isAdminLoggedIn, function (req, res) {
     mysqlConnection.query(
       "SELECT * FROM student_information ",
       function (err, result) {
@@ -397,9 +373,6 @@ app.get("/payform", function (req, res) {
         }
       }
     );
-  } else {
-    res.redirect("/login");
-  }
 });
 
 app.post("/payform", function (req, res) {
@@ -476,8 +449,7 @@ app.post("/payform", function (req, res) {
   }
 });
 
-app.get("/paymentinfo", function (req, res) {
-  if (req.session.loggedin && req.session.username === "Admin") {
+app.get("/paymentinfo", isAdminLoggedIn, function (req, res) {
     mysqlConnection.query(
       "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName,student_information.LastName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId",
       function (err, result) {
@@ -489,9 +461,6 @@ app.get("/paymentinfo", function (req, res) {
         }
       }
     );
-  } else {
-    res.redirect("/login");
-  }
 });
 
 app.get("/monthlypayments", function (req, res) {
@@ -569,6 +538,22 @@ app.get("/logout", function (req, res) {
   req.session.destroy();
   res.redirect("/home");
 });
+
+function isAdminLoggedIn(req, res, next) {
+  if (req.session.loggedin && req.session.username === "Admin") {
+    return next();
+  } else {
+    res.redirect("/login");
+  }
+}
+
+function isUserLoggedIn(req, res, next) {
+  if (req.session.loggedin && req.session.username !== "Admin") {
+    return next();
+  } else {
+    res.redirect("/login");
+  }
+}
 
 app.listen("3000", function () {
   console.log("Connected");
