@@ -71,7 +71,7 @@
       <h1>Payment Information</h1>
 
       <h4>Search for students who havent paid for different months:</h4>
-      <form action="/month" method="post">
+      <form action="/absentpayment" method="GET">
         <select class="form-control form-control-sm" name="year">
           <% var date=new Date().getFullYear(); %> <%for(var i=date;i>2014;i--)
           { %>
