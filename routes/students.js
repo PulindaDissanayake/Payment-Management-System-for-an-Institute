@@ -15,6 +15,7 @@ router.post("/register", function (req, res) {
   var school = req.body.school;
   var grade = req.body.grade;
   var email = req.body.email;
+  var userName = req.body.username;
   var cpassword = req.body.cpassword;
   // var index = req.body.index;
   var isFilled =
@@ -30,7 +31,7 @@ router.post("/register", function (req, res) {
 
   if (isFilled) {
     mysqlConnection.query(
-      "Insert into student_information (FirstName,LastName,Birthday,GuardianName,MobileNumber,School,Grade,Username) VALUES ('" +
+      "Insert into student_information (FirstName,LastName,Birthday,GuardianName,MobileNumber,School,Grade,Username,Email) VALUES ('" +
         firstName +
         "','" +
         lastName +
@@ -45,6 +46,8 @@ router.post("/register", function (req, res) {
         "'," +
         grade +
         ",'" +
+        userName +
+        "','" +
         email +
         "')",
       function (err, result) {
@@ -56,7 +59,7 @@ router.post("/register", function (req, res) {
             "Insert into logininfo (ID,UserName,Password)  VALUES ('" +
               result?.insertId +
               "','" +
-              email +
+              userName +
               "','" +
               cpassword +
               "')",
@@ -65,7 +68,7 @@ router.post("/register", function (req, res) {
                 console.log(err);
               } else {
                 res.render("register", {
-                  success: "Student is registered : " + email,
+                  success: "Student is registered : " + userName +" - "+ email,
                   error: "",
                 });
               }

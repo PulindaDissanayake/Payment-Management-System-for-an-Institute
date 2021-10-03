@@ -126,8 +126,8 @@ router.get("/paymentinfo", isAdminLoggedIn, function (req, res) {
 });
 
 router.get("/absentpayment", function (req, res) {
-  var year = req.body.year;
-  var month = req.body.month;
+  var year = req.query.year;
+  var month = req.query.month;
 
   var date = year + "-" + month;
 

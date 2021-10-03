@@ -4,7 +4,7 @@ var session = require("express-session");
 
 var newsRoutes = require("./routes/news");
 var authRoutes = require("./routes/auth");
-var userRoutes = require("./routes/userroles");
+var userRolesRoutes = require("./routes/userroles");
 var smsRoutes = require("./routes/smsservice");
 var paymentRoutes = require("./routes/payments");
 var studentRoutes = require("./routes/students");
@@ -30,7 +30,7 @@ app.get("/", function (req, res) {
 
 app.use(newsRoutes);
 app.use(authRoutes);
-app.use(userRoutes);
+app.use(userRolesRoutes);
 app.use(smsRoutes);
 app.use(paymentRoutes);
 app.use(studentRoutes);
