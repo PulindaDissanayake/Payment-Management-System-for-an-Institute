@@ -3,6 +3,7 @@ var router = express.Router();
 var mysqlConnection = require("../model/db");
 var transporter = require("../model/email");
 var mailOptions = require("../model/email");
+var mailTypes = require("../model/mailtype");
 
 router.get("/news", function (req, res) {
   var admin =
@@ -84,12 +85,14 @@ function sendEmail(grade, news) {
           } else {
             console.log("Email sent: " + info.response);
             mysqlConnection.query(
-              "Insert into sent_emails (Response,ToMail,MailBody,Date) VALUES ('" +
+              "Insert into sent_emails (Response,ToMail,MailBody,MailType,Date) VALUES ('" +
                 info.response +
                 "','" +
                 mailOptions.to +
                 "','" +
                 mailOptions.text +
+                "','" +
+                mailTypes.News +
                 "','" +
                 new Date().toISOString() +
                 "')",

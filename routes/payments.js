@@ -1,6 +1,9 @@
 var express = require("express");
 var router = express.Router();
 var mysqlConnection = require("../model/db");
+var transporter = require("../model/email");
+var mailOptions = require("../model/email");
+var mailTypes = require("../model/mailtype");
 
 router.get("/mypayments/:id", isUserLoggedIn, function (req, res) {
   mysqlConnection.query(
@@ -21,20 +24,20 @@ router.get("/mypayments/:id", isUserLoggedIn, function (req, res) {
 });
 
 router.get("/payform", isAdminLoggedIn, function (req, res) {
-    mysqlConnection.query(
-      "SELECT * FROM student_information ",
-      function (err, result) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render("payform", {
-            studentinfo: result,
-            message: "",
-            error: "",
-          });
-        }
+  mysqlConnection.query(
+    "SELECT * FROM student_information ",
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("payform", {
+          studentinfo: result,
+          message: "",
+          error: "",
+        });
       }
-    );
+    }
+  );
 });
 
 router.post("/payform", function (req, res) {
@@ -44,6 +47,14 @@ router.post("/payform", function (req, res) {
   var month1 = req.body.month;
 
   var date = year + "-" + month1;
+
+  var news =
+    "We received your " +
+    date +
+    " payment of rs." +
+    amount +
+    ". " +
+    "We value you as a preferred customer and Please call us if you have any problems.";
 
   if (username && month1 && year && amount) {
     mysqlConnection.query(
@@ -69,12 +80,12 @@ router.post("/payform", function (req, res) {
               } else {
                 mysqlConnection.query(
                   "SELECT * FROM student_information ",
-                  function (err, result) {
+                  function (err, result3) {
                     if (err) {
                       console.log(err);
                     } else {
                       res.render("payform", {
-                        studentinfo: result,
+                        studentinfo: result3,
                         error: "",
                         message:
                           username +
@@ -87,6 +98,9 @@ router.post("/payform", function (req, res) {
                     }
                   }
                 );
+                if ((result1[0].StudentId, news)) {
+                  sendEmail(result1[0].StudentId, news);
+                }
               }
             }
           );
@@ -96,12 +110,12 @@ router.post("/payform", function (req, res) {
   } else {
     mysqlConnection.query(
       "SELECT * FROM student_information ",
-      function (err, result) {
+      function (err, result4) {
         if (err) {
           console.log(err);
         } else {
           res.render("payform", {
-            studentinfo: result,
+            studentinfo: result4,
             message: "",
             error: "Please fill all the inputs",
           });
@@ -112,17 +126,17 @@ router.post("/payform", function (req, res) {
 });
 
 router.get("/paymentinfo", isAdminLoggedIn, function (req, res) {
-    mysqlConnection.query(
-      "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName,student_information.LastName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId",
-      function (err, result) {
-        if (err) {
-          console.log(err);
-        } else {
-          // console.log(result);
-          res.render("paymentinfo", { paymentinfo: result });
-        }
+  mysqlConnection.query(
+    "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName,student_information.LastName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId",
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        // console.log(result);
+        res.render("paymentinfo", { paymentinfo: result });
       }
-    );
+    }
+  );
 });
 
 router.get("/absentpayment", function (req, res) {
@@ -162,6 +176,51 @@ function isUserLoggedIn(req, res, next) {
   } else {
     res.redirect("/login");
   }
+}
+
+function sendEmail(studentId, news) {
+  mysqlConnection.query(
+    "SELECT Email FROM student_information where StudentId='" + studentId + "'",
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      } else if (result.length !== 0) {
+        mailOptions.to = Array.prototype.map
+          .call(result, function (item) {
+            return item.Email;
+          })
+          .join(",");
+        mailOptions.subject = "Payment Confirmation From ORACLE";
+        mailOptions.text = news;
+
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Email sent: " + info.response);
+            mysqlConnection.query(
+              "Insert into sent_emails (Response,ToMail,MailBody,MailType,Date) VALUES ('" +
+                info.response +
+                "','" +
+                mailOptions.to +
+                "','" +
+                mailOptions.text +
+                "','" +
+                mailTypes.Payment +
+                "','" +
+                new Date().toISOString() +
+                "')",
+              function (err, result) {
+                if (err) {
+                  console.log(err);
+                }
+              }
+            );
+          }
+        });
+      }
+    }
+  );
 }
 
 module.exports = router;

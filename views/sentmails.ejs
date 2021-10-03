@@ -77,6 +77,7 @@
           <tr>
             <!-- <th>Index Number</th> -->
             <th scope="col">Date</th>
+            <th scope="col">Mail Type</th>
             <th scope="col">Sent Adresses</th>
             <th scope="col">Mail Body</th>
             <th scope="col">Server Response</th>
@@ -88,6 +89,9 @@
           <tr>
               <td>
                 <%= mail.Date.toString().slice(0,24); %>
+              </td>
+              <td>
+                <%= mail.MailType %>
               </td>
               <td>
                 <%= mail.ToMail %>
