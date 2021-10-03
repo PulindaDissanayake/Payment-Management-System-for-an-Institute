@@ -27,6 +27,7 @@ router.post("/register", function (req, res) {
     school &&
     grade &&
     email &&
+    userName &&
     cpassword;
 
   if (isFilled) {
@@ -116,8 +117,8 @@ router.post("/delete/:id", function (req, res) {
   );
 });
 
-router.post("/update/:user", function (req, res) {
-  var user = req.params.user;
+router.post("/update/:id", function (req, res) {
+  var StudentId = req.params.id;
   var FirstName = req.body.FirstName;
   var LastName = req.body.LastName;
   var Username = req.body.Username;
@@ -126,6 +127,7 @@ router.post("/update/:user", function (req, res) {
   var MobileNumber = req.body.MobileNumber;
   var School = req.body.School;
   var Grade = req.body.Grade;
+  var Email = req.body.Email;
 
   //console.log(req);
 
@@ -146,8 +148,10 @@ router.post("/update/:user", function (req, res) {
       School +
       "',Grade='" +
       Grade +
-      "'  WHERE Username='" +
-      user +
+      "',Email='" +
+      Email +
+      "'  WHERE StudentId='" +
+      StudentId +
       "'",
     function (err, results) {
       if (err) {
