@@ -71,10 +71,21 @@
                     </label>
                     <textarea rows="5" type="text" name="news" placeholder="" class="mb-3" required></textarea>
 
-                    <label for="date">
+                    <!-- <label for="date">
                         <h5>Date</h5>
                     </label>
-                    <input type="date" name="date" placeholder="" class="mb-3" required>
+                    <input type="date" name="date" placeholder="" class="mb-3" value="<%=new Date().toISOString().slice(0,10);%>" required disabled> -->
+
+                    <label for="grade">
+                        <h5>Grade (To notify by emails)</h5>
+                    </label>
+                    <select class="form-control form-control-sm" name="grade">
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <%for(var i=13;i>0;i--)
+                        { %>
+                        <option value="<%= i%>"><%= i%></option>
+                        <% }%>
+                      </select>
 
                     <input type="submit" value="Submit">
                 </form>

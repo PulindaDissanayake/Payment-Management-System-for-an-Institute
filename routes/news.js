@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var mysqlConnection = require("../model/db");
+var transporter = require("../model/email");
+var mailOptions = require("../model/email");
 
 router.get("/news", function (req, res) {
   var admin =
@@ -28,8 +30,9 @@ router.get("/news", function (req, res) {
 
 router.post("/news", isAdminLoggedIn, function (req, res) {
   var news = req.body.news;
-  var aposNews = news.replace(/\'/g, "\\\'");
-  var date = req.body.date;
+  var aposNews = news.replace(/\'/g, "\\'");
+  var date = new Date().toISOString();
+  var grade = req.body.grade;
 
   if (news && date) {
     mysqlConnection.query(
@@ -47,14 +50,44 @@ router.post("/news", isAdminLoggedIn, function (req, res) {
       }
     );
   }
+  if ((grade, news)) {
+    sendEmail(grade, news);
+  }
 });
 
 function isAdminLoggedIn(req, res, next) {
-    if (req.session.loggedin && req.session.username === "Admin") {
-      return next();
-    } else {
-      res.redirect("/login");
-    }
+  if (req.session.loggedin && req.session.username === "Admin") {
+    return next();
+  } else {
+    res.redirect("/login");
   }
+}
+
+function sendEmail(grade, news) {
+  mysqlConnection.query(
+    "SELECT Email FROM student_information where Grade='" + grade + "'",
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      } else if(result.length !== 0) {
+        mailOptions.to = Array.prototype.map
+          .call(result, function (item) {
+            return item.Email;
+          })
+          .join(",");
+        mailOptions.subject = "News From ORACLE";
+        mailOptions.text = news;
+
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Email sent: " + info.response);
+          }
+        });
+      }
+    }
+  );
+}
 
 module.exports = router;
