@@ -28,12 +28,13 @@ router.get("/news", function (req, res) {
 
 router.post("/news", isAdminLoggedIn, function (req, res) {
   var news = req.body.news;
+  var aposNews = news.replace(/\'/g, "\\\'");
   var date = req.body.date;
 
   if (news && date) {
     mysqlConnection.query(
       "Insert into news (Description,Date) VALUES ('" +
-        news +
+        aposNews +
         "','" +
         date +
         "')",
