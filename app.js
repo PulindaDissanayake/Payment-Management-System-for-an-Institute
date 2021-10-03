@@ -8,6 +8,7 @@ var userRolesRoutes = require("./routes/userroles");
 var smsRoutes = require("./routes/smsservice");
 var paymentRoutes = require("./routes/payments");
 var studentRoutes = require("./routes/students");
+var emailRoutes = require("./routes/email");
 
 app.use(
   session({
@@ -34,6 +35,7 @@ app.use(userRolesRoutes);
 app.use(smsRoutes);
 app.use(paymentRoutes);
 app.use(studentRoutes);
+app.use(emailRoutes);
 
 app.listen("3000", function () {
   console.log("Connected");

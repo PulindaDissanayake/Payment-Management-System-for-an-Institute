@@ -69,7 +69,7 @@ function sendEmail(grade, news) {
     function (err, result) {
       if (err) {
         console.log(err);
-      } else if(result.length !== 0) {
+      } else if (result.length !== 0) {
         mailOptions.to = Array.prototype.map
           .call(result, function (item) {
             return item.Email;
@@ -83,6 +83,22 @@ function sendEmail(grade, news) {
             console.log(error);
           } else {
             console.log("Email sent: " + info.response);
+            mysqlConnection.query(
+              "Insert into sent_emails (Response,ToMail,MailBody,Date) VALUES ('" +
+                info.response +
+                "','" +
+                mailOptions.to +
+                "','" +
+                mailOptions.text +
+                "','" +
+                new Date().toISOString() +
+                "')",
+              function (err, result) {
+                if (err) {
+                  console.log(err);
+                }
+              }
+            );
           }
         });
       }

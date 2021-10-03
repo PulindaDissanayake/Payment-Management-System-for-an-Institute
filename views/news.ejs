@@ -34,6 +34,9 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="/emails">Sent Emails</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/home">Go Back</a>
                 </li>
             </ul>
@@ -50,7 +53,7 @@
                 <div class="pt-2 px-5">
                     <div class="text-md-right text-center">
                         <h6>
-                            <%=new Date(news.Date).toISOString().slice(0,10);%>
+                            <%=news.Date.toString().slice(0,24);%>
                         </h6>
                     </div>
                 </div>
