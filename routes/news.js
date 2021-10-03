@@ -51,7 +51,7 @@ router.post("/news", isAdminLoggedIn, function (req, res) {
     );
   }
   if ((grade, news)) {
-    sendEmail(grade, news);
+    sendEmail(grade, aposNews);
   }
 });
 
