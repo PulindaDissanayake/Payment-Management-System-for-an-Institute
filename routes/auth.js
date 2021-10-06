@@ -41,41 +41,41 @@ router.post("/login", function (req, res) {
 });
 
 router.get("/home", function (req, res) {
-    if (req?.session?.loggedin) {
-      if (req?.session?.username === "Admin") {
-        res.redirect("/home/signedIn/admin");
-      } else {
-        res.redirect("/home/signedIn/student");
-      }
+  if (req?.session?.loggedin) {
+    if (req?.session?.username === "Admin") {
+      res.redirect("/home/signedIn/admin");
     } else {
-      var signIn = "Sign In";
-      var login = "/login";
-      var home = "#";
-      var studentinfo = "";
-      var paymentinfo = "";
-      var addpayment = "";
-      var reglink = ""; //<a class='nav-link ' href='/register'> Register </a>";
-      var signOut = "";
-      var news = "<a class='nav-link' href='/news'>News</a>";
-      res.render("home", {
-        signIn,
-        login,
-        home,
-        studentinfo,
-        paymentinfo,
-        addpayment,
-        reglink,
-        signOut,
-        news,
-      });
+      res.redirect("/home/signedIn/student");
     }
-  });
-  
+  } else {
+    var signIn = "Sign In";
+    var login = "/login";
+    var home = "#";
+    var studentinfo = "";
+    var paymentinfo = "";
+    var addpayment = "";
+    var reglink = ""; //<a class='nav-link ' href='/register'> Register </a>";
+    var signOut = "";
+    var news = "<a class='nav-link' href='/news'>News</a>";
+    var sentMails = "";
+    res.render("home", {
+      signIn,
+      login,
+      home,
+      studentinfo,
+      paymentinfo,
+      addpayment,
+      reglink,
+      signOut,
+      news,
+      sentMails,
+    });
+  }
+});
 
 router.get("/logout", function (req, res) {
-    // req.session.currentUser = null;
-    req.session.destroy();
-    res.redirect("/home");
-  });
+  req.session.destroy();
+  res.render("login", { error: "You have logged out successfully" });
+});
 
 module.exports = router;

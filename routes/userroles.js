@@ -11,6 +11,7 @@ router.get("/home/signedin/student", isUserLoggedIn, function (req, res) {
   var reglink = `<a class='nav-link ' href='/mypayments/${req.session.username}'> My payments </a>`;
   var signOut = "<a class='nav-link ' href='/logout'> Log Out </a>";
   var news = "<a class='nav-link' href='/news'>News</a>";
+  var sentMails = "";
   res.render("home", {
     signIn,
     login,
@@ -21,6 +22,7 @@ router.get("/home/signedin/student", isUserLoggedIn, function (req, res) {
     reglink,
     signOut,
     news,
+    sentMails,
   });
 });
 
@@ -36,6 +38,7 @@ router.get("/home/signedin/admin", isAdminLoggedIn, function (req, res) {
     "<a class='nav-link ' href='/register'> Register Students</a>";
   var signOut = "<a class='nav-link ' href='/logout'> Log Out</a>";
   var news = "<a class='nav-link' href='/news'>News</a>";
+  var sentMails = "<a class='nav-link' href='/emails'>Sent Emails</a>";
   res.render("home", {
     signIn,
     login,
@@ -44,8 +47,9 @@ router.get("/home/signedin/admin", isAdminLoggedIn, function (req, res) {
     addpayment,
     home,
     reglink,
-    signOut: signOut,
+    signOut,
     news,
+    sentMails,
   });
 });
 
