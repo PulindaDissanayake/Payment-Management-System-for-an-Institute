@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var bcrypt = require("bcryptjs");
 var mysqlConnection = require("../model/db");
 
 router.get("/login", function (req, res) {
@@ -14,27 +15,38 @@ router.post("/login", function (req, res) {
   var password = req.body.password;
   if (username && password) {
     mysqlConnection.query(
-      "SELECT*FROM logininfo WHERE UserName = ? AND Password = ? ",
-      [username, password],
+      "SELECT*FROM logininfo WHERE UserName = ? ",
+      [username],
       function (err, results) {
         if (err) throw err;
         if (results.length > 0) {
-          req.session.loggedin = true;
-          req.session.username = username;
+          var comparison = authenticate(
+            password,
+            results[0]?.Password,
+            results[0]?.Admin
+          );
+          if (comparison) {
+            req.session.loggedin = true;
+            req.session.username = username;
 
-          if (results[0].Admin === 2) {
-            res.redirect("/home/signedIn/admin");
+            if (results[0].Admin === 2) {
+              res.redirect("/home/signedIn/admin");
+            } else {
+              res.redirect("/home/signedIn/student");
+            }
           } else {
-            res.redirect("/home/signedIn/student");
+            res.render("login", {
+              error: "Incorrect Password!",
+            });
           }
         } else {
-          res.render("login", { error: "Incorrect Username and/or Password!" });
+          res.render("login", { error: "Incorrect Username!" });
         }
         res.end();
       }
     );
   } else {
-    res.render("login", { error: "Please enter Username and Password!" });
+    res.render("login", { error: "Please enter both Username and Password!" });
     res.end();
   }
   //redirect to home page
@@ -78,4 +90,11 @@ router.get("/logout", function (req, res) {
   res.render("login", { error: "You have logged out successfully" });
 });
 
+function authenticate(password, passwordDB, admin) {
+  if (admin === 2) {
+    return password.trim() === passwordDB.trim();
+  } else {
+    return bcrypt.compareSync(password, passwordDB);
+  }
+}
 module.exports = router;

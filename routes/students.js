@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var bcrypt = require('bcryptjs');
 var mysqlConnection = require("../model/db");
 
 router.get("/register", isAdminLoggedIn, function (req, res) {
@@ -17,6 +18,8 @@ router.post("/register", function (req, res) {
   var email = req.body.email;
   var userName = req.body.username;
   var cpassword = req.body.cpassword;
+
+  var passwordHash = bcrypt.hashSync(cpassword, 10);
   // var index = req.body.index;
   var isFilled =
     firstName &&
@@ -62,7 +65,7 @@ router.post("/register", function (req, res) {
               "','" +
               userName +
               "','" +
-              cpassword +
+              passwordHash +
               "')",
             function (err, result) {
               if (err) {
