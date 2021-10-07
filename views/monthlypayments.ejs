@@ -88,7 +88,7 @@
           <td><%= student.Grade %></td>
           <td>
             <form
-              action="/notify/<%= student.FirstName %>/<%= student.MobileNumber %>/<%=selectedmonth%>"
+              action="/notify/<%= student.StudentId %>/<%=selectedmonth%>"
               method="POST"
               autocomplete="off"
             >
