@@ -17,8 +17,7 @@
 
 .navbar-nav .nav-item .nav-link {
     color: white;
-    font-family: 'Jomolhari', serif;
-    font-weight: 500px;
+    font-weight: 500;
     /* line-height to allow full clickable area */
 }
 

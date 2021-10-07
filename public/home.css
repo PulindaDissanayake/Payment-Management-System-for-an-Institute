@@ -16,8 +16,7 @@ body {
 
 .navbar-nav .nav-item .nav-link {
     color: white;
-    font-family: 'Jomolhari', serif;
-    font-weight: 500px;
+    font-weight: 500;
     /* line-height to allow full clickable area */
 }
 
@@ -294,4 +293,18 @@ h3 {
 
 .content {
     padding: 10px 15vw;
+}
+
+.dropdown-menu {
+    background-color: 	#333333;
+}
+
+.dropdown-item {
+    color: #fff !important;
+    font-weight: 500;
+}
+
+.dropdown-item:hover {
+    color: #333333 !important;
+    background-color: rgb(11, 223, 205);
 }
