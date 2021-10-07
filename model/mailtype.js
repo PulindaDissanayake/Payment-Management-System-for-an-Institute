@@ -2,7 +2,8 @@
 
 var mailType = {
     Payment: "Payment",
-    News: "News"
+    News: "News",
+    Registration: "Registration"
 }
 
 module.exports = mailType;

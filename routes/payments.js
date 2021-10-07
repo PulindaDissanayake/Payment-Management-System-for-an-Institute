@@ -178,7 +178,7 @@ function isUserLoggedIn(req, res, next) {
   }
 }
 
-function sendEmail(studentId, news) {
+function sendEmail(studentId, text) {
   mysqlConnection.query(
     "SELECT Email FROM student_information where StudentId='" + studentId + "'",
     function (err, result) {
@@ -191,7 +191,7 @@ function sendEmail(studentId, news) {
           })
           .join(",");
         mailOptions.subject = "Payment Confirmation From ORACLE";
-        mailOptions.text = news;
+        mailOptions.text = text;
 
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
