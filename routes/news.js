@@ -76,7 +76,7 @@ function sendEmail(grade, news) {
             return item.Email;
           })
           .join(",");
-        mailOptions.subject = "News From ORACLE";
+        mailOptions.subject =mailTypes.News.subject;
         mailOptions.text = news;
 
         transporter.sendMail(mailOptions, function (error, info) {
@@ -92,7 +92,7 @@ function sendEmail(grade, news) {
                 "','" +
                 mailOptions.text +
                 "','" +
-                mailTypes.News +
+                mailTypes.News.type +
                 "','" +
                 new Date().toISOString() +
                 "')",

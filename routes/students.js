@@ -196,7 +196,7 @@ function sendEmail(username, text) {
             return item.Email;
           })
           .join(",");
-        mailOptions.subject = "Account Creation | ORACLE";
+        mailOptions.subject = mailTypes.Registration.subject;
         mailOptions.text = text;
 
         transporter.sendMail(mailOptions, function (error, info) {
@@ -212,7 +212,7 @@ function sendEmail(username, text) {
                 "','" +
                 mailOptions.text +
                 "','" +
-                mailTypes.Registration +
+                mailTypes.Registration.type +
                 "','" +
                 new Date().toISOString() +
                 "')",

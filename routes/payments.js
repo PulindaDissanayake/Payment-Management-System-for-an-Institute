@@ -190,7 +190,7 @@ function sendEmail(studentId, text) {
             return item.Email;
           })
           .join(",");
-        mailOptions.subject = "Payment Confirmation From ORACLE";
+        mailOptions.subject = mailTypes.Payment.subject;
         mailOptions.text = text;
 
         transporter.sendMail(mailOptions, function (error, info) {
@@ -206,7 +206,7 @@ function sendEmail(studentId, text) {
                 "','" +
                 mailOptions.text +
                 "','" +
-                mailTypes.Payment +
+                mailTypes.Payment.type +
                 "','" +
                 new Date().toISOString() +
                 "')",
