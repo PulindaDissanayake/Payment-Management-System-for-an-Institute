@@ -2,54 +2,51 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/home/signedin/student", isUserLoggedIn, function (req, res) {
-  var signIn = `Welcome ${req.session.username}`;
-  var login = "#";
-  var home = "#";
-  var studentinfo = "";
-  var paymentinfo = "";
-  var addpayment = "";
+  var signIn = `Signed in as ${req.session.username}`;
   var reglink = `<a class='nav-link ' href='/mypayments/${req.session.username}'> My payments </a>`;
   var signOut = "<a class='nav-link ' href='/logout'> Log Out </a>";
   var news = "<a class='nav-link' href='/news'>News</a>";
   var sentMails = "";
+  var dropdownStudents = "";
+  var dropdownPayments ="";
+  var login = "";
   res.render("home", {
     signIn,
-    login,
-    studentinfo,
-    paymentinfo,
-    addpayment,
-    home,
     reglink,
     signOut,
     news,
     sentMails,
+    dropdownStudents,
+    dropdownPayments,
+    login,
   });
 });
 
 router.get("/home/signedin/admin", isAdminLoggedIn, function (req, res) {
-  var signIn = `Welcome ${req.session.username}`;
-  var home = "#";
-  var login = "";
-  var studentinfo =
-    "<a class='nav-link' href='/adminstudentinfo'>Student Information</a>";
-  var paymentinfo = "<a class='nav-link' href='/paymentinfo'>Paymentinfo</a>";
-  var addpayment = "<a class='nav-link' href='/payform'>Add Payments</a>";
-  var reglink =
-    "<a class='nav-link ' href='/register'> Register Students</a>";
+  var signIn = `Signed in as ${req.session.username}`;
+  var reglink = "";
   var signOut = "<a class='nav-link ' href='/logout'> Log Out</a>";
   var news = "<a class='nav-link' href='/news'>News</a>";
   var sentMails = "<a class='nav-link' href='/emails'>Sent Emails</a>";
+  var dropdownStudents =
+    "<li class='nav-item dropdown'>" +
+    "<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" +
+    "Students</a><div class='dropdown-menu' aria-labelledby='navbarDropdown'><a class='dropdown-item' href='/adminstudentinfo'>Student Information</a>" +
+    "<div class='dropdown-divider'></div><a class='dropdown-item' href='/register'> Register Students</a></div></li>";
+  var dropdownPayments = "<li class='nav-item dropdown'>" +
+  "<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" +
+  "Payments</a><div class='dropdown-menu' aria-labelledby='navbarDropdown'><a class='dropdown-item' href='/paymentinfo'>Payment Info</a>" +
+  "<div class='dropdown-divider'></div><a class='dropdown-item' href='/payform'>Add Payments</a></div></li>";
+  var login = "";
   res.render("home", {
     signIn,
-    login,
-    studentinfo,
-    paymentinfo,
-    addpayment,
-    home,
     reglink,
     signOut,
     news,
     sentMails,
+    dropdownStudents,
+    dropdownPayments,
+    login,
   });
 });
 

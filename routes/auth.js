@@ -61,26 +61,22 @@ router.get("/home", function (req, res) {
     }
   } else {
     var signIn = "Sign In";
-    var login = "/login";
-    var home = "#";
-    var studentinfo = "";
-    var paymentinfo = "";
-    var addpayment = "";
-    var reglink = ""; //<a class='nav-link ' href='/register'> Register </a>";
+    var reglink = "";
     var signOut = "";
     var news = "<a class='nav-link' href='/news'>News</a>";
     var sentMails = "";
+    var dropdownStudents= "";
+    var dropdownPayments = "";
+    var login = "/login";
     res.render("home", {
       signIn,
-      login,
-      home,
-      studentinfo,
-      paymentinfo,
-      addpayment,
       reglink,
       signOut,
       news,
       sentMails,
+      dropdownStudents,
+      dropdownPayments,
+      login,
     });
   }
 });

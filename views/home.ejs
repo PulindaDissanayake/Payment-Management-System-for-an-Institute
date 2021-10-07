@@ -22,7 +22,7 @@
 <body style="padding-top: 50px">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-navbar fixed-top">
-        <a class="navbar-brand" href=<%=home%>>Oracle</a>
+        <a class="navbar-brand" href="/home">Oracle</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                           <span class="navbar-toggler-icon"></span>
                         </button>
@@ -30,41 +30,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href=<%=home%></a>Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/home"</a>Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <%- news %>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Our Staff</a>
-                </li>
+                <li class="nav-item ">
+                    <%-dropdownStudents%> 
+            </li>
+            <li class="nav-item ">
+                <%-dropdownPayments%> 
+            </li>
+            <li class="nav-item">
+                <%- news %>
+            </li>
                 <li class="nav-item">
                     <%- sentMails %>
-                </li>
-                <li class="nav-item">
-                    <!-- <a class="nav-link" href="/adminstudentinfo">Student Information</a> -->
-                    <%- studentinfo %>
-                </li>
-                <li class="nav-item">
-                    <!-- <a class="nav-link" href="/paymentinfo">Paymentinfo</a> -->
-                    <%- paymentinfo %>
-                </li>
-                <li class="nav-item">
-                    <!-- <a class="nav-link" href="/payform">Add Payments</a> -->
-                    <%- addpayment %>
                 </li>
 
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item ">
-                    <a class="nav-link " href=<%=login%>>
+                <li class="nav-item">
+                    <a class="nav-link " href=<%-login%> >
                         <%= signIn %> 
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <!-- <a class="nav-link " href=/register>
-                           Register
-                        </a> -->
                     <%-reglink%>
                 </li>
                 <li class="nav-item ">
