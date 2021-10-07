@@ -49,6 +49,9 @@ router.post("/payform", function (req, res) {
   var date = year + "-" + month1;
 
   var news =
+    "Hi " +
+    username +
+    ",\n\n" +
     "We received your " +
     date +
     " payment of rs." +

@@ -1,15 +1,14 @@
 var express = require("express");
 var router = express.Router();
-var bcrypt = require('bcryptjs');
-var os = require('os');
+var bcrypt = require("bcryptjs");
+var os = require("os");
 var transporter = require("../model/email");
 var mailOptions = require("../model/email");
 var mailTypes = require("../model/mailtype");
 var mysqlConnection = require("../model/db");
 
-
 var networkInterfaces = os.networkInterfaces();
-var address = networkInterfaces['Loopback Pseudo-Interface 1'][1].address;
+var address = networkInterfaces["Loopback Pseudo-Interface 1"][1].address;
 
 router.get("/register", isAdminLoggedIn, function (req, res) {
   res.render("register", { error: "", success: "" });
@@ -28,7 +27,13 @@ router.post("/register", function (req, res) {
   var cpassword = req.body.cpassword;
 
   var passwordHash = bcrypt.hashSync(cpassword, 10);
-  var text = "Your ORACLE account is set up with the information and credentials you provided. You can now login with "+ address +" using those credentials."
+  var text =
+    "Hi" +
+    firstName +
+    ",\n\n" +
+    "Your ORACLE account is set up with the information and credentials you provided. You can now login with " +
+    address +
+    " using those credentials.";
   // var index = req.body.index;
   var isFilled =
     firstName &&
@@ -80,9 +85,10 @@ router.post("/register", function (req, res) {
               if (err) {
                 console.log(err);
               } else {
-                sendEmail(userName, text)
+                sendEmail(userName, text);
                 res.render("register", {
-                  success: "Student is registered : " + userName +" - "+ email,
+                  success:
+                    "Student is registered : " + userName + " - " + email,
                   error: "",
                 });
               }
