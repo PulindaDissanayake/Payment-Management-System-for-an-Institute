@@ -35,7 +35,7 @@ router.get("/home/signedin/admin", isAdminLoggedIn, function (req, res) {
     "<div class='dropdown-divider'></div><a class='dropdown-item' href='/register'> Register Students</a></div></li>";
   var dropdownPayments = "<li class='nav-item dropdown'>" +
   "<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" +
-  "Payments</a><div class='dropdown-menu' aria-labelledby='navbarDropdown'><a class='dropdown-item' href='/paymentinfo'>Payment Info</a>" +
+  "Payments</a><div class='dropdown-menu' aria-labelledby='navbarDropdown'><a class='dropdown-item' href='/paymentinfo'>Payment Information</a>" +
   "<div class='dropdown-divider'></div><a class='dropdown-item' href='/payform'>Add Payments</a></div></li>";
   var login = "";
   res.render("home", {
