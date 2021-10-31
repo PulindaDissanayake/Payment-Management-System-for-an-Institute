@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 
 <body style="padding-top: 50px">
@@ -70,11 +71,11 @@
 
     <div class="container">
         <header>
-            <div class="jumbotron jumbotron-fluid">
+            <div class="jumbotron jumbotron-fluid" style="background-image: url('/images/home.png');">
                 <div class="container">
                     <div class="col-lg-12 ">
                         <h1 class="heading">Oracle Institute</h1>
-                        <p id="motto">Dedicated to Standard of Excellence</p>
+                        <p id="motto" style="color: white;">Dedicated to Standard of Excellence</p>
                     </div>
                 </div>
             </div>
@@ -88,7 +89,7 @@
             </div>
 
 
-            <div class="container-fluid;">
+            <div class="container-fluid">
 
                 <div class="row "
                     style="background-color: rgba(118, 177, 245, 0.712); background-size: cover; height:auto;  ">
@@ -132,14 +133,7 @@
         </div>
 
     </div>
-
-
-
-
-
-
-
-
+    <%- include('../views/footer.ejs'); -%>
 
 
 </body>
