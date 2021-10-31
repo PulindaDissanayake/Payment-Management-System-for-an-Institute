@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Oracle</title>
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/home.css">
@@ -20,7 +25,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
 
 <body style="padding-top: 50px">
@@ -49,7 +55,9 @@
                 <li class="nav-item">
                     <%- sentMails %>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" onclick="toStaff()">Our Staff</a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -80,62 +88,70 @@
                 </div>
             </div>
         </header>
+            <div>
+                <div class=" " style="margin-top: 2%">
+                    <h1
+                        style="padding: 1%; color: rgb(35, 38, 39);  font-weight: 700; font-size: 3em; font-family: 'Lato', sans-serif; text-align: center; ">
+                        Why you must choose "Oracle"?</h1>
+                </div>
 
-        <div>
-            <div class=" " style="margin-top: 2%">
-                <h1
-                    style="padding: 1%; color: rgb(35, 38, 39);  font-weight: 700; font-size: 3em; font-family: 'Lato', sans-serif; text-align: center; ">
-                    Why you must choose "Oracle"?</h1>
-            </div>
 
+                <div class="container-fluid">
 
-            <div class="container-fluid">
+                    <div class="row "
+                        style="background-color: rgba(118, 177, 245, 0.712); background-size: cover; height:auto;  ">
+                        <div class="col-sm-6 col-lg-6 border">
+                            <div class="ml-3 mt-3 mb-2 mr-2" style="padding-left: 1%">
+                                <h1 style="text-align: center; color: rgb(19, 18, 18) ">We have a history!</h1>
+                                <P class=" text-center "
+                                    style="color: rgb(14, 13, 13); display: block; font-weight: 500; font-size: 18px ">
+                                    We
+                                    are the pioneers of English education from 1999 in Anuradhapura. We are devoted to
+                                    make
+                                    your child a future leader. We give the proper English language education which
+                                    includes
+                                    speaking, reading & writing. Only from our institute
+                                    your child will be able to develop all these four skills.
+                                </P>
+                            </div>
 
-                <div class="row "
-                    style="background-color: rgba(118, 177, 245, 0.712); background-size: cover; height:auto;  ">
-                    <div class="col-sm-6 col-lg-6 border">
-                        <div class="ml-3 mt-3 mb-2 mr-2" style="padding-left: 1%">
-                            <h1 style="text-align: center; color: rgb(19, 18, 18) ">We have a history!</h1>
-                            <P class=" text-center "
-                                style="color: rgb(14, 13, 13); display: block; font-weight: 500; font-size: 18px ">We
-                                are the pioneers of English education from 1999 in Anuradhapura. We are devoted to make
-                                your child a future leader. We give the proper English language education which includes
-                                speaking, reading & writing. Only from our institute
-                                your child will be able to develop all these four skills.
-                            </P>
                         </div>
 
-                    </div>
+                        <div class="col-sm-6 col-lg-6 border"
+                            style="text-align: center; font-weight: 500; font-size: 18px ">
+                            <div class="mt-2 pt-2">
+                                <h2 style="font-weight: bold; color: rgb(15, 14, 14)">In our institute we have</h2>
+                                <ul class="list-unstyled " style="color: rgb(19, 18, 18)">
+                                    <li>A friendly environment</li>
+                                    <li> A Play ground</li>
+                                    <li>Personal development</li>
+                                    <li> Educational materials</li>
+                                </ul>
+                            </div>
 
-                    <div class="col-sm-6 col-lg-6 border"
-                        style="text-align: center; font-weight: 500; font-size: 18px ">
-                        <div class="mt-2 pt-2">
-                            <h2 style="font-weight: bold; color: rgb(15, 14, 14)">In our institute we have</h2>
-                            <ul class="list-unstyled " style="color: rgb(19, 18, 18)">
-                                <li>A friendly environment</li>
-                                <li> A Play ground</li>
-                                <li>Personal development</li>
-                                <li> Educational materials</li>
-                            </ul>
+
+
+
+
+
+
                         </div>
-
-
-
-
-
-
 
                     </div>
 
                 </div>
-
+                <%- include('../views/partials/staff.ejs'); -%>
             </div>
-        </div>
 
     </div>
-    <%- include('../views/footer.ejs'); -%>
+    <%- include('../views/partials/footer.ejs'); -%>
 
 
 </body>
-
+<script>
+    function toStaff() {
+  var element = document.getElementById("team");
+  element.scrollIntoView();
+}
+</script>
 </html>
