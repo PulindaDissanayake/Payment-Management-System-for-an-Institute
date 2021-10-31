@@ -28,7 +28,7 @@ router.post("/register", function (req, res) {
 
   var passwordHash = bcrypt.hashSync(cpassword, 10);
   var text =
-    "Hi" +
+    "Hi " +
     firstName +
     ",\n\n" +
     "Your ORACLE account is set up with the information and credentials you provided. You can now login with " +
