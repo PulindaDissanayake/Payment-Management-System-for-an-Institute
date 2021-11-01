@@ -4,6 +4,7 @@ var mysqlConnection = require("../model/db");
 var transporter = require("../model/email");
 var mailOptions = require("../model/email");
 var mailTypes = require("../model/mailtype");
+var newsTypes = require("../model/newsType");
 
 router.get("/news", function (req, res) {
   var admin =
@@ -23,6 +24,7 @@ router.get("/news", function (req, res) {
           res.render("news", { news: sortedresult, addNews: user });
         }
       } else {
+        sortedresult = sortedresult.filter(function(el) { return el.NewsType == "Public"; }); 
         res.render("news", { news: sortedresult, addNews: user });
       }
     }
@@ -34,11 +36,16 @@ router.post("/news", isAdminLoggedIn, function (req, res) {
   var aposNews = news.replace(/\'/g, "\\'");
   var date = new Date().toISOString();
   var grade = req.body.grade;
+  var public = req.body.public;
+  var type = public ? newsTypes.Public : newsTypes.Private;
+  console.log(type)
 
   if (news && date) {
     mysqlConnection.query(
-      "Insert into news (Description,Date) VALUES ('" +
+      "Insert into news (Description,NewsType,Date) VALUES ('" +
         aposNews +
+        "','" + 
+        type +
         "','" +
         date +
         "')",
