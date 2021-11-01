@@ -1,172 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>StudentInfo</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="adminstudentinfo.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://fonts.googleapis.com/css?family=Jomolhari&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Anton&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-navbar fixed-top">
-      <a class="navbar-brand" href="/home ">Oracle</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>StudentInfo</title>
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="adminstudentinfo.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Jomolhari&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+</head>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/home"
-              >Home <span class="sr-only">(current)</span></a
-            >
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/home">Go Back</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div>
-      <table class="table table-sm table-bordered" id="table">
-        <thead class="thead-dark">
-          <tr>
-            <!-- <th>Index Number</th> -->
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Birthday</th>
-            <th scope="col">Grade</th>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-navbar fixed-top">
+    <a class="navbar-brand" href="/home ">Oracle</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <th scope="col">Guardian Name</th>
-            <th scope="col">Mobile Number</th>
-            <th scope="col">School</th>
-            <th scope="col" colspan="2">Actions</th>
-          </tr>
-        </thead>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Go Back</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div>
+    <table class="table table-sm table-bordered" id="table">
+      <thead class="thead-dark">
+        <tr>
+          <!-- <th>Index Number</th> -->
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Birthday</th>
+          <th scope="col">Grade</th>
 
-        <tbody>
-          <% studentinfo.forEach(function (student) { %>
+          <th scope="col">Guardian Name</th>
+          <th scope="col">Mobile Number</th>
+          <th scope="col">School</th>
+          <th scope="col" colspan="2">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% studentinfo.forEach(function (student) { %>
           <tr>
             <form action="/update/<%=student.StudentId%>" method="post">
               <td>
-                <input
-                  type="text"
-                  name="Username"
-                  value="<%= student.Username %>"
-                  required
-                  readonly
-                />
+                <input type="text" name="Username" value="<%= student.Username %>" required readonly />
               </td>
               <td>
-                <input
-                  type="text"
-                  name="Email"
-                  value="<%= student.Email %>"
-                  required
-                />
+                <input type="text" name="Email" value="<%= student.Email %>" required />
               </td>
               <td>
-                <input
-                  type="text"
-                  name="FirstName"
-                  value="<%= student.FirstName %>"
-                  required
-                />
+                <input type="text" name="FirstName" value="<%= student.FirstName %>" required />
               </td>
               <td>
-                <input
-                  type="text"
-                  name="LastName"
-                  value="<%= student.LastName %>"
-                  required
-                />
+                <input type="text" name="LastName" value="<%= student.LastName %>" required />
               </td>
               <td>
-                <input
-                  type="date"
-                  name="Birthday"
-                  value="<%= student.Birthday.toISOString().slice(0,10); %>"
-                  required
-                />
+                <input type="date" name="Birthday" value="<%= student.Birthday.toISOString().slice(0,10); %>"
+                  required />
               </td>
               <td>
-                <input
-                  type="text"
-                  name="Grade"
-                  value="<%= student.Grade %>"
-                  required
-                />
+                <input type="text" name="Grade" value="<%= student.Grade %>" required />
               </td>
               <td>
-                <input
-                  type="text"
-                  name="GuardianName"
-                  value="<%= student.GuardianName %>"
-                  required
-                />
+                <input type="text" name="GuardianName" value="<%= student.GuardianName %>" required />
               </td>
               <td>
-                <input
-                  type="text"
-                  name="MobileNumber"
-                  value="<%= student.MobileNumber %>"
-                  required
-                />
+                <input type="text" name="MobileNumber" value="<%= student.MobileNumber %>" required />
               </td>
               <td>
-                <input
-                  type="text"
-                  name="School"
-                  value="<%= student.School %>"
-                  required
-                />
+                <input type="text" name="School" value="<%= student.School %>" required />
               </td>
               <td>
                 <button type="submit" class="btn btn-primary btn-sm">
@@ -175,18 +101,41 @@
               </td>
             </form>
             <td>
-              <form action="/delete/<%=student.StudentId%>" method="POST">
-                <button type="submit" class="btn btn-primary btn-sm">
-                  Delete
-                </button>
-              </form>
+              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                Delete
+              </button>
             </td>
           </tr>
-          <% }) %>
-        </tbody>
-      </table>
-    </div>
+          <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
 
-    <script src="/scripts/adminstudentinfo.js"></script>
-  </body>
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <h6>
+                    Are you sure to delete "<%=student.Username%> - <%=student.FirstName%>
+                        <%= student.LastName %>"
+                  </h6>
+                </div>
+
+                <!-- Modal footer -->
+
+                <div class="modal-footer">
+                  <form action="/delete/<%=student.StudentId%>" method="POST">
+                    <button type="submit" class="btn btn-danger">
+                      Yes, I'am sure
+                    </button>
+                  </form>
+                  <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+
 </html>

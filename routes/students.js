@@ -1,14 +1,11 @@
 var express = require("express");
 var router = express.Router();
 var bcrypt = require("bcryptjs");
-var os = require("os");
 var transporter = require("../model/email");
 var mailOptions = require("../model/email");
 var mailTypes = require("../model/mailtype");
 var mysqlConnection = require("../model/db");
 
-var networkInterfaces = os.networkInterfaces();
-var address = networkInterfaces["Loopback Pseudo-Interface 1"][1].address;
 
 router.get("/register", isAdminLoggedIn, function (req, res) {
   res.render("register", { error: "", success: "" });
@@ -27,12 +24,13 @@ router.post("/register", function (req, res) {
   var cpassword = req.body.cpassword;
 
   var passwordHash = bcrypt.hashSync(cpassword, 10);
+  var fullUrl = req.protocol + '://' + req.get('host');
   var text =
     "Hi " +
     firstName +
     ",\n\n" +
     "Your ORACLE account is set up with the information and credentials you provided. You can now login with " +
-    address +
+    fullUrl +
     " using those credentials.";
   // var index = req.body.index;
   var isFilled =
