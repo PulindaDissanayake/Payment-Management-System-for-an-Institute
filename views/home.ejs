@@ -146,7 +146,31 @@
     </div>
     <%- include('../views/partials/footer.ejs'); -%>
 
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
 
+            <!-- Modal body -->
+            <div class="modal-body">
+              <h4>
+                Are you sure you want to Logout?
+              </h4>
+            </div>
+
+            <!-- Modal footer -->
+
+            <div class="modal-footer">
+                <form method="get" action="/logout">
+                <button type="submit" class="btn btn-success">
+                    Yes, I'am sure
+                </button>
+            </form>
+              <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
 </body>
 <script>
     function toStaff() {
