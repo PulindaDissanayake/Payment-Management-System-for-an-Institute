@@ -149,7 +149,7 @@ router.get("/absentpayment", function (req, res) {
   var date = year + "-" + month;
 
   mysqlConnection.query(
-    "SELECT StudentId,FirstName,MobileNumber,Grade FROM student_information WHERE StudentId not in (SELECT DISTINCT StudentId FROM payments WHERE Month='" +
+    "SELECT StudentId,FirstName,MobileNumber,Grade,Email FROM student_information WHERE StudentId not in (SELECT DISTINCT StudentId FROM payments WHERE Month='" +
       date +
       "' )",
     function (err, result) {

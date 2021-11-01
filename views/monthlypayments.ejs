@@ -93,7 +93,34 @@
               method="POST"
               autocomplete="off"
             >
-              <button type="submit" class="btn btn-primary">Notify User</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"">Notify User</button>
+              <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <h6>
+                        Are you sure to notify "<%=student.StudentId%> - <%=student.FirstName%>
+                            <%= student.LastName %>" ? <br/><br/>
+                            MobileNumber: <%= student.MobileNumber %> <br/>
+                            Email: <%= student.Email %>
+                      </h6>
+                    </div>
+    
+                    <!-- Modal footer -->
+    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">
+                          Yes, I'am sure
+                        </button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+    
+                  </div>
+                </div>
+              </div>
+            
             </form>
           </td>
         </tr>
