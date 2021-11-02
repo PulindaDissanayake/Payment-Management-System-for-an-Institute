@@ -4,7 +4,7 @@ var router = express.Router();
 router.get("/home/signedin/student", isUserLoggedIn, function (req, res) {
   var signIn = `Signed in as ${req.session.username}`;
   var reglink = `<a class='nav-link ' href='/mypayments/${req.session.username}'> My payments </a>`;
-  var signOut = "<a class='nav-link ' data-toggle='modal' data-target='#myModal'> Log Out </a>";
+  var signOut = "<a class='nav-link ' data-toggle='modal' data-target='#myModal'> Log Out <i class='fas fa-sign-out-alt'></i></a>";
   var news = "<a class='nav-link' href='/news'>News</a>";
   var sentMails = "";
   var dropdownStudents = "";
@@ -25,7 +25,7 @@ router.get("/home/signedin/student", isUserLoggedIn, function (req, res) {
 router.get("/home/signedin/admin", isAdminLoggedIn, function (req, res) {
   var signIn = `Signed in as ${req.session.username}`;
   var reglink = "";
-  var signOut = "<a class='nav-link ' data-toggle='modal' data-target='#myModal'> Log Out</a>";
+  var signOut = "<a class='nav-link ' data-toggle='modal' data-target='#myModal'> Log Out <i class='fas fa-sign-out-alt'></i></a>";
   var news = "<a class='nav-link' href='/news'>News</a>";
   var sentMails = "<a class='nav-link' href='/emails'>Sent Emails</a>";
   var dropdownStudents =

@@ -130,7 +130,7 @@ router.post("/payform", function (req, res) {
 
 router.get("/paymentinfo", isAdminLoggedIn, function (req, res) {
   mysqlConnection.query(
-    "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName,student_information.LastName FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId",
+    "SELECT payments.PaymentId,payments.Month,payments.Amount,student_information.FirstName,student_information.LastName,student_information.Username FROM payments INNER JOIN student_information ON payments.StudentId=student_information.StudentId",
     function (err, result) {
       if (err) {
         console.log(err);
