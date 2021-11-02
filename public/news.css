@@ -1,3 +1,7 @@
+body {
+  background-color: #e9e7e7;
+}
+
 .formbeautify {
   margin: 2% auto;
   width: 30%;
@@ -38,9 +42,10 @@ hr {
 }
 
 .news_box {
-  background-color: lightgray;
+  background-color: white;
   min-height: 100px;
   font-weight: 500;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .overlay {

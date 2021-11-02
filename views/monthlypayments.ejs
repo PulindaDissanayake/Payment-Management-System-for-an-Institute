@@ -93,19 +93,20 @@
               method="POST"
               autocomplete="off"
             >
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"">Notify User</button>
-              <div class="modal" id="myModal">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal<%=student.StudentId%>">Notify User</button>
+              <div class="modal" id="myModal<%=student.StudentId%>">
                 <div class="modal-dialog">
                   <div class="modal-content">
     
                     <!-- Modal body -->
                     <div class="modal-body">
-                      <h6>
-                        Are you sure to notify "<%=student.StudentId%> - <%=student.FirstName%>
-                            <%= student.LastName %>" ? <br/><br/>
-                            MobileNumber: <%= student.MobileNumber %> <br/>
-                            Email: <%= student.Email %>
-                      </h6>
+                      <h5>
+                        Are you sure to notify<br/> " <%=student.Username%> - <%=student.FirstName%>
+                        <%= student.LastName %>" ? <br/><br/>
+                      </h5>
+                      <h6>Grade :</h6> <%= student.Grade %> <br/><br/>
+                      <h6>MobileNumber :</h6> <%= student.MobileNumber %> <br/><br/>
+                      <h6>Email :</h6> <%= student.Email %>
                     </div>
     
                     <!-- Modal footer -->
